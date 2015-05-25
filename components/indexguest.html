@@ -1,0 +1,16 @@
+<div id="bp-header"></div>
+
+<main class="sitio-contenido">
+    <div id="bp-content" class="full-window"></div>
+</main>
+
+<div id="bp-footer" class="footer-index"></div>
+
+<script type="text/javascript">
+	$("#bp-header").load("components/headerguest.html");
+	$("#bp-content").load("components/sliderindex.html");
+	$("#bp-footer").load("components/footer.html");
+	$('.carousel').carousel({
+        interval: 3000 //changes the speed
+    })
+</script>

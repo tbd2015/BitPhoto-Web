@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>BitPhoto | Búsqueda</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <!--
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cosmo/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link href="css/userstyles.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="sitio">
+        <div id="bp-header"></div>
+
+         <main class="sitio-contenido">
+            <div id="bp-content">
+                <div class="container">
+                    <div class="row">
+                        <ul class="nav nav-tabs margin">
+                            <li role="presentation" class="active"><a href="#">Fotos</a></li>
+                            <li role="presentation"><a href="#">Propias</a></li>
+                            <li role="presentation"><a href="#">Amigos</a></li>
+                            <li class="pull-right">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option>Relevante</option>
+                                            <option>Reciente</option>
+                                            <option>Interesante</option>
+                                        </select>
+                                        <select class="form-control">
+                                            <option value="copyright">Todos los derechos reservados</option>
+                                            <option value="cc">Creative Commons</option>
+                                            <option value="free">Uso liberado</option>
+                                        </select>
+                                        <button type="submit">Buscar</button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="bp-gallery"></div>                    
+                </div>
+                
+            </div>
+        </main>
+
+        <div id="bp-footer"></div>
+
+        <!-- Local JavaScript Libraries -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/userscripts.js"></script>
+
+        <!-- CDN JavaScript Libraries -->
+        <!--
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>        
+        -->
+
+        <script type="text/javascript">
+            $("#bp-header").load("components/header.html");
+            //$("#bp-content").load("components/homegallery.html");
+            $("#bp-gallery").load("components/genericgallery.html");
+            $("#bp-footer").load("components/footer.html");
+        </script>
+    </body>
+</html>
