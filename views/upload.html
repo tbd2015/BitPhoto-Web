@@ -1,0 +1,32 @@
+<div id="bp-header"></div>
+
+<main class="sitio-contenido">
+    <div id="bp-content" class="margin">
+        <div class="container">
+            <h2>Subir Imágenes a BitPhoto</h2>
+            <input id="input-image" type="file" multiple="true">
+        </div>
+    </div>
+</main>
+
+<div id="bp-footer"></div>
+
+<script src="js/fileinput.min.js"></script>
+<script src="js/fileinput_locale_es.js"></script>
+
+<script type="text/javascript">
+    // Elementos estáticos
+	$("#bp-header").load("components/header.html");
+	$("#bp-footer").load("components/footer.html");
+    // File input
+    $("#input-image").fileinput({
+        initialPreview: [
+            "<img src='images/uploads/up01.jpg' class='file-preview-image' title='imagen01'>",
+            "<img src='images/uploads/up02.jpg' class='file-preview-image' title='imagen02'>",
+        ],
+        overwriteInitial: true,
+        maxFileCount: 10,
+        allowedFileExtensions: ["jpg", "gif", "png"],
+        initialCaption: "Subir Imágenes"
+    });
+</script>

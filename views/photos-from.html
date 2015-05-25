@@ -1,0 +1,44 @@
+<div id="bp-header"></div>
+
+<main class="sitio-contenido">
+    <div id="bp-content">
+        <div class="container">
+            <div class="row">
+                <ul class="nav nav-tabs margin">
+                    <li style="margin-right: 10px;">
+                        <h3 style="margin: 5px 0 10px 0;">Gente a quien sigues</h3>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="#/fotos-de">Fotos de</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#/fotos-con">Fotos con</a>
+                    </li>
+                    <li class="pull-right">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>5 por persona</option>
+                                    <option>1 por persona</option>
+                                </select>
+                                <button type="submit">Recargar</button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                
+            </div>
+            <div id="bp-gallery"></div>
+        </div>
+    </div>
+</main>
+
+<div id="bp-footer"></div>
+
+<script type="text/javascript">
+	$("#bp-header").load("components/header.html");
+    $("#bp-gallery").load("components/genericgallery.html");
+    $("#bp-footer").load("components/footer.html");
+</script>

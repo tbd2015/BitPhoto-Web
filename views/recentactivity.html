@@ -1,0 +1,38 @@
+<div id="bp-header"></div>
+
+<main class="sitio-contenido">
+    <div id="bp-content">
+        <div class="container">
+            <ul class="nav nav-tabs margin">
+                <li>
+                    <h3 style="margin: 5px 0 10px 0;">Actividad Reciente</h3>
+                </li>
+                <li class="pull-right">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Desde el comienzo</option>
+                                <option>Desde la última conexión</option>
+                                <option>Desde la última hora</option>
+                                <option>Desde las últimas 8 horas</option>
+                                <option>Desde el último día</option>
+                                <option>Desde la última semana</option>
+                                <option>Desde el último mes</option>
+                            </select>
+                            <button type="submit">Recargar</button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div id="bp-timeline"></div>
+    </div>
+</main>
+
+<div id="bp-footer"></div>
+
+<script type="text/javascript">
+    $("#bp-header").load("components/header.html");
+    $("#bp-timeline").load("components/timeline.html");
+    $("#bp-footer").load("components/footer.html");
+</script>

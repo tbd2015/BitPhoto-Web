@@ -4,4 +4,8 @@
 	app.controller('HomeCtrl', function($scope) {
 	    $scope.variable = "";
 	});
+
+	app.controller('UploadCtrl', function($scope) {
+		$scope.variable = "";
+	});
 })();
