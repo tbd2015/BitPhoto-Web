@@ -1,10 +1,10 @@
 (function(){
-	var app = angular.module('bitphoto-app', ['ngRoute', 'bitphoto-controllers']);
+	var app = angular.module('bitphoto-app', ['ngRoute', 'bitphoto-controllers', 'bitphoto-services']);
 
     app.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
-		    when('/inicio', {templateUrl: 'views/indexguest.html',   controller: 'HomeCtrl'}).
-		    when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
+		    when('/inicio', {templateUrl: 'views/indexguest.html',   controller: 'LoginCtrl'}).
+		    when('/registro', {templateUrl: 'views/register.html',   controller: 'RegisterCtrl'}).
 		    when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
 
 		    when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'HomeCtrl'}).
@@ -33,4 +33,11 @@
 			
 	        otherwise({redirectTo: '/inicio'});
 	}]);
+
+	app.directive('loadComponent', function() {
+    return {
+		templateUrl: function(elem, attr){
+      		return attr.route;
+		}
+    }});
 })();

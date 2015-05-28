@@ -18,22 +18,20 @@
 		                <ul class="dropdown-menu dropdown-login">
 		                    <li>
 		                    	<div class="panel-body">
-			                        <form role="form" action="home.html">
-			                            <fieldset>
-			                                <div class="form-group">
-			                                    <input class="form-control" placeholder="Correo Electrónico" name="email" type="email" autofocus="">
-			                                </div>
-			                                <div class="form-group">
-			                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" value="">
-			                                </div>
-			                                <div class="checkbox">
-			                                    <label>
-			                                        <input name="remember" type="checkbox" value="Remember Me">Recordar sesión
-			                                    </label>
-			                                </div>
-			                                <button href="#/portada" class="btn btn-sm btn-success">Iniciar Sesión</button>
-			                            </fieldset>
-			                        </form>
+			                        <form name="loginForm">
+		                                <div class="form-group">
+		                                    <input class="form-control" placeholder="Correo Electrónico" name="email" type="email" data-ng-model="formData.email" required>
+		                                </div>
+		                                <div class="form-group">
+		                                    <input class="form-control" placeholder="Contraseña" name="password" type="password" data-ng-model="formData.password" required>
+		                                </div>
+		                                <div class="form-group checkbox">
+		                                    <label>
+		                                        <input name="remember" type="checkbox" value="true" data-ng-model="formData.remember">Recordar sesión
+		                                    </label>
+		                                </div>
+		                                <button type="submit" class="btn btn-success pull-right" data-ng-click="submitLogin(formData)">Iniciar Sesión</button>
+	                                </form>
 			                    </div>
 	    					</li>
 		                </ul>
