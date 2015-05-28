@@ -1,10 +1,10 @@
 (function(){
-	var app = angular.module('bitphoto-app', ['ngRoute', 'bitphoto-controllers', 'bitphoto-services']);
+	var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'bitphoto-controllers', 'bitphoto-services']);
 
-    app.config(['$routeProvider', function($routeProvider) {
+    app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
-		    when('/inicio', {templateUrl: 'views/indexguest.html',   controller: 'LoginCtrl'}).
-		    when('/registro', {templateUrl: 'views/register.html',   controller: 'RegisterCtrl'}).
+		    when('/', {templateUrl: 'views/indexguest.html',   controller: 'HomeCtrl'}).
+		    when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
 		    when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
 
 		    when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'HomeCtrl'}).
@@ -33,6 +33,23 @@
 			
 	        otherwise({redirectTo: '/inicio'});
 	}]);
+
+	app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
+       	// keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+ 
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in and trying to access a restricted page
+            var restrictedPage = $.inArray($location.path(), ['/', '/registro']) === -1;
+            var loggedIn = $rootScope.globals.currentUser;
+            if (restrictedPage && !loggedIn) {
+                $location.path('/');
+            }
+        });
+    }]);
 
 	app.directive('loadComponent', function() {
     return {

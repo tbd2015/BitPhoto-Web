@@ -77,3 +77,15 @@ body {
     color: #fff;
     transition: all 0.5s ease 0s;
 }
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+input.ng-valid {
+  border: 1px solid green;
+}
+
+input.ng-pristine {
+  border: 1px solid gray;
+}
