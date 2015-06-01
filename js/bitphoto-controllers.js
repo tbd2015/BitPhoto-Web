@@ -3,7 +3,7 @@
 
 	var JsonServer = "http://localhost:4000";
 
-	app.controller('SessionCtrl', function($scope, $location) {
+	app.controller('SessionCtrl', function($scope, $location, AuthenticationService) {
 	    $scope.formLogin = {};
 	    $scope.formRegister = {};
 	    $scope.registerStatus = "";
@@ -38,6 +38,18 @@
 				$scope.registerStatus = "¡Formulario de Registro Inválido!";
 			}
 		};
+
+		$scope.logout = function () {
+			AuthenticationService.ClearCredentials();
+			$location.path("/");
+		}
+	});
+
+	app.controller('UserCtrl', function($scope, UserDataFactory) {
+	    UserDataFactory.nombre().then(function(f){ $scope.nombre = f });
+	    UserDataFactory.apellido().then(function(f){ $scope.apellido = f });
+	    UserDataFactory.apodo().then(function(f){ $scope.apodo = f });
+	    UserDataFactory.descripcion().then(function(f){ $scope.descripcion = f });
 	});
 
 	app.controller('HomeCtrl', function($scope) {

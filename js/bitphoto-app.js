@@ -7,12 +7,12 @@
 		    when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
 		    when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
 
-		    when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'HomeCtrl'}).
-		    when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'HomeCtrl'}).
-		    when('/albumes', {templateUrl: 'views/albums.html',   controller: 'HomeCtrl'}).
-		    when('/mapa', {templateUrl: 'views/map.html',   controller: 'HomeCtrl'}).
-		    when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'HomeCtrl'}).
-		    when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'HomeCtrl'}).
+		    when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'UserCtrl'}).
+		    when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'UserCtrl'}).
+		    when('/albumes', {templateUrl: 'views/albums.html',   controller: 'UserCtrl'}).
+		    when('/mapa', {templateUrl: 'views/map.html',   controller: 'UserCtrl'}).
+		    when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'UserCtrl'}).
+		    when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'UserCtrl'}).
 
 		    when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
 		    when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'HomeCtrl'}).
@@ -38,6 +38,7 @@
        	// keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
+        	//console.log($rootScope.globals.currentUser);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }
  

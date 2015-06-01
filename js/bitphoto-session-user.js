@@ -8,7 +8,7 @@
     UserService.$inject = ['$http'];
     function UserService($http) {
         var service = {};
-        var serverUrl = "http://localhost:4000";
+        var serverUrl = "http://localhost:4400";
  
         service.GetAll = GetAll;
         service.GetById = GetById;
@@ -29,11 +29,12 @@
         }
 
         function GetByEmail(email) {
-            return $http.get(serverUrl + '/usuarios/' + email).then(handleSuccess, handleError('Error getting user by email'));
+            return $http.get(serverUrl + '/usuarios', { params: { email: email } } ).then(handleSuccess, handleError('Error getting user by email'));
+            //return $http.get(serverUrl + '/usuarios/' + email).then(handleSuccess, handleError('Error getting user by email'));
         }
  
         function GetByUsername(username) {
-            return $http.get(serverUrl + '/usuarios/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get(serverUrl + '/usuarios', { params: { username: username } }).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {

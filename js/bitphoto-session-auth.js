@@ -8,6 +8,7 @@
     AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
     function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
         var service = {};
+        var serverUrl = "http://localhost:4400";
  
         service.Login = Login;
         service.SetCredentials = SetCredentials;
@@ -19,30 +20,35 @@
  
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
+            
             $timeout(function () {
                 var response;
                 UserService.GetByEmail(email)
                     .then(function (user) {
                         if (user !== null && user.password === password) {
+                            console.log("jai!");
                             response = { success: true };
                         } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
+                            console.log("nai!");
+                            response = { success: false, message: 'Email or password is incorrect' };
                         }
                         callback(response);
                     });
             }, 1000);
- 
+            
+
             /* Use this for real authentication
              ----------------------------------------------*/
             //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            /*$http.get(serverUrl + '/usuarios', params: { email: email })
+                .success(function (response) {
+                    callback(response);
+                });*/
  
         }
  
         function SetCredentials(email, password) {
-            var authdata = Base64.encode(username + ':' + password);
+            var authdata = Base64.encode(email + ':' + password);
  
             $rootScope.globals = {
                 currentUser: {
