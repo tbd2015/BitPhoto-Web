@@ -22,7 +22,7 @@
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
 						//console.log(f.firstName);
-						return f.firstName;
+						return f.nombre;
 					}, function (error) {
 						console.log(error);
 						return null;
@@ -32,7 +32,7 @@
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
 						//console.log(f.lastName);
-						return f.lastName;
+						return f.apellido;
 					}, function (error) {
 						console.log(error);
 						return null;
@@ -42,7 +42,7 @@
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
 						//console.log(f.firstName);
-						return f.username;
+						return f.apodo;
 					}, function (error) {
 						console.log(error);
 						return null;

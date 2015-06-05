@@ -8,20 +8,20 @@
                     <h2>Regístrate <small>Únete a la comunidad de BitPhoto</small></h2>
                     <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
                     <form name="form" ng-submit="vm.register()" role="form">
-                        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-                            <label for="username">Nombre</label>
-                            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-                            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">Nombre requerido</span>
+                        <div class="form-group" ng-class="{ 'has-error': form.nombre.$dirty && form.nombre.$error.required }">
+                            <label for="apodo">Nombre</label>
+                            <input type="text" name="nombre" id="nombre" class="form-control" ng-model="vm.user.nombre" required />
+                            <span ng-show="form.nombre.$dirty && form.nombre.$error.required" class="help-block">Nombre requerido</span>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-                            <label for="username">Apellido</label>
-                            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
-                            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Apellido requerido</span>
+                        <div class="form-group" ng-class="{ 'has-error': form.apellido.$dirty && form.apellido.$error.required }">
+                            <label for="apodo">Apellido</label>
+                            <input type="text" name="apellido" id="Text1" class="form-control" ng-model="vm.user.apellido" required />
+                            <span ng-show="form.apellido.$dirty && form.apellido.$error.required" class="help-block">Apellido requerido</span>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                            <label for="username">Apodo (Nombre de Usuario)</label>
-                            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.username" required />
-                            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Apodo requerido</span>
+                        <div class="form-group" ng-class="{ 'has-error': form.apodo.$dirty && form.apodo.$error.required }">
+                            <label for="apodo">Apodo (Nombre de Usuario)</label>
+                            <input type="text" name="apodo" id="apodo" class="form-control" ng-model="vm.user.apodo" required />
+                            <span ng-show="form.apodo.$dirty && form.apodo.$error.required" class="help-block">Apodo requerido</span>
                         </div>
                          <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
                             <label for="email">Correo Electrónico</label>
