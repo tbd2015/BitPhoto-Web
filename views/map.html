@@ -1,4 +1,4 @@
-<div id="bp-header"></div>
+<div load-component route="components/header.html"></div>
 
 <main class="sitio-contenido">
     <div id="bp-content">
@@ -11,14 +11,8 @@
             -->
             <div class="fill" style="background-image:url('images/map/map2.jpg');"></div>
         </div>
-        <div id="bp-photoscroll"></div>
+        <div load-component route="components/photoscroll.html"></div>
     </div>
 </main>
 
-<div id="bp-footer"></div>
-
-<script type="text/javascript">
-    $("#bp-header").load("components/header.html");
-    $("#bp-photoscroll").load("components/bp-photoscroll.html");
-    $("#bp-footer").load("components/footer.html");
-</script>
+<div load-component route="components/footer.html"></div>

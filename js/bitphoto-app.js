@@ -31,7 +31,7 @@
 	        when('/demo2b/:marca', {templateUrl: 'demo2b.html',   controller: 'JsonCtrl'}).
 			*/
 			
-	        otherwise({redirectTo: '/inicio'});
+	        otherwise({redirectTo: '/'});
 	}]);
 
 	app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
