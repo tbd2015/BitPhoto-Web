@@ -21,7 +21,6 @@
 			nombre: function() {
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
-						//console.log(f.firstName);
 						return f.nombre;
 					}, function (error) {
 						console.log(error);
@@ -31,7 +30,6 @@
 			apellido: function() {
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
-						//console.log(f.lastName);
 						return f.apellido;
 					}, function (error) {
 						console.log(error);
@@ -41,7 +39,6 @@
 			apodo: function() {
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
-						//console.log(f.firstName);
 						return f.apodo;
 					}, function (error) {
 						console.log(error);
@@ -51,7 +48,6 @@
 			descripcion: function() {
 				promise = GetterService.getUser();
 				return promise.then(function(f) {
-						//console.log(f.firstName);
 						return f.descripcion;
 					}, function (error) {
 						console.log(error);

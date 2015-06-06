@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'bitphoto-controllers', 'bitphoto-services']);
+	var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
