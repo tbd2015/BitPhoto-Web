@@ -3,35 +3,40 @@
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
-		    when('/', {templateUrl: 'views/indexguest.html',   controller: 'HomeCtrl'}).
-		    when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
-		    when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
+            when('/', {templateUrl: 'views/indexguest.html',   controller: 'HomeCtrl'}).
+            when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
+            when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
 
-		    when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'UserCtrl'}).
-		    when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'UserCtrl'}).
-		    when('/albumes', {templateUrl: 'views/albums.html',   controller: 'UserCtrl'}).
-		    when('/mapa', {templateUrl: 'views/map.html',   controller: 'UserCtrl'}).
-		    when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'UserCtrl'}).
-		    when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'UserCtrl'}).
+            when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'UserCtrl'}).
+            when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'UserCtrl'}).
+            when('/albumes', {templateUrl: 'views/albums.html',   controller: 'UserCtrl'}).
+            when('/mapa', {templateUrl: 'views/map.html',   controller: 'UserCtrl'}).
+            when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'UserCtrl'}).
+            when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'UserCtrl'}).
 
-		    when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
-		    when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'HomeCtrl'}).
+            when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
+            when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'HomeCtrl'}).
 
-		    when('/recientes', {templateUrl: 'views/recentphotos.html',   controller: 'HomeCtrl'}).
-		    when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).
-		    when('/camaras', {templateUrl: 'views/camerafinder.html',   controller: 'HomeCtrl'}).
+            when('/recientes', {templateUrl: 'views/recentphotos.html',   controller: 'HomeCtrl'}).
+            when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).
+            when('/camaras', {templateUrl: 'views/camerafinder.html',   controller: 'HomeCtrl'}).
 
-		    when('/subida', {templateUrl: 'views/upload.html',   controller: 'UploadCtrl'}).
+            when('/subida', {templateUrl: 'views/upload.html',   controller: 'UploadCtrl'}).
 
-		    /*
-	        when('/demo', {templateUrl: 'demo.html',   controller: 'DemoCtrl'}).
-	        when('/demo1', {templateUrl: 'demo1.html',   controller: 'MapaCtrl'}).
-	        when('/demo2', {templateUrl: 'demo2.html',   controller: 'FormCtrl'}).
-	        when('/demo2a/:marca', {templateUrl: 'demo2a.html',   controller: 'JsonCtrl'}).
-	        when('/demo2b/:marca', {templateUrl: 'demo2b.html',   controller: 'JsonCtrl'}).
-			*/
+            when('/foto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
+            when('/album', {templateUrl: 'views/view-album.html',   controller: 'AlbumCtrl'}).
+            
+            when('/hola', {templateUrl: 'views/holamundo.html',   controller: 'HolaCtrl'}).
+
+            /*
+            when('/demo', {templateUrl: 'demo.html',   controller: 'DemoCtrl'}).
+            when('/demo1', {templateUrl: 'demo1.html',   controller: 'MapaCtrl'}).
+            when('/demo2', {templateUrl: 'demo2.html',   controller: 'FormCtrl'}).
+            when('/demo2a/:marca', {templateUrl: 'demo2a.html',   controller: 'JsonCtrl'}).
+            when('/demo2b/:marca', {templateUrl: 'demo2b.html',   controller: 'JsonCtrl'}).
+            */
 			
-	        otherwise({redirectTo: '/'});
+            otherwise({redirectTo: '/'});
 	}]);
 
 	app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {

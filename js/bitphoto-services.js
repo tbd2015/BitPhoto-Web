@@ -15,6 +15,21 @@
 			});
 		};
 	});
+        
+        app.service('HolaService', function($q) {
+	    this.getHola = function() {
+	    	var cookie = $rootScope.globals.currentUser;
+	        var user = {};
+
+	        var p0 = UserService.GetByEmail(cookie.email);
+
+	        return $q.all([p0]).then(function(res) {
+	        	var retorno = res[0];
+				console.log(retorno);
+				return retorno;
+			});
+		};
+	});
 
 	app.factory('UserDataFactory', function(GetterService) {
 		return {

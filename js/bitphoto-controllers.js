@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('bitphoto-controllers',[]);
+	var app = angular.module('bitphoto-controllers', []);
 
 	var JsonServer = "http://localhost:4000";
 
@@ -57,6 +57,36 @@
 	});
 
 	app.controller('UploadCtrl', function($scope) {
+            $scope.variable = "";
+	});
+
+	app.controller('PhotoCtrl', function($scope) {
+            $scope.tituloImagen = "Foto";
+            $scope.autorImagen = "Juan Pérez";
+            $scope.descripcionImagen = "holi";
+
+            $scope.fechaTomadaImagen = "03/12/2014";
+            $scope.fechaSubidaImagen = "04/12/2014";
+            $scope.urlImagen = "http://lorempixel.com/640/480/cats/";
+
+            $scope.visitasImagen = "";
+            $scope.favoritosImagen = "";
+            $scope.comentariosImagen = "";
+            $scope.permisosImagen = "";
+
+            $scope.marcaCamara = "";
+            $scope.nombreCamara = "";
+            $scope.resCamara = "";
+            $scope.zoomCamara = "";
+
+            $scope.comentarios = {};
+	});
+
+	app.controller('AlbumCtrl', function($scope, $stateParams) {
+		$scope.variable = "";
+	});
+        
+        app.controller('HolaCtrl', function($scope) {
 		$scope.variable = "";
 	});
 })();

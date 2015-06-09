@@ -6,7 +6,7 @@
 
 .sitio-contenido {
     flex: 1 0 auto; /* 2 */
-    padding: var(--space) var(--space) 0;
+    padding: 0 0 0 0;
     width: 100%;
 }
 
@@ -76,6 +76,12 @@ body {
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
     transition: all 0.5s ease 0s;
+}
+
+.fotografia {
+    display: block;
+    height: auto;
+    max-width: 100%;
 }
 
 input.ng-invalid {
