@@ -83,10 +83,10 @@
 	});
 
 	app.controller('AlbumCtrl', function($scope, $stateParams) {
-		$scope.variable = "";
+            $scope.variable = "";
 	});
         
-        app.controller('HolaCtrl', function($scope) {
-		$scope.variable = "";
+        app.controller('HolaCtrl', function($scope, HolaService) {
+            HolaService.getHola().then(function(f){ $scope.mensaje = f });
 	});
 })();

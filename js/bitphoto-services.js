@@ -16,12 +16,12 @@
 		};
 	});
         
-        app.service('HolaService', function($q) {
+        app.service('HolaService', function($http, $q) {
 	    this.getHola = function() {
-	    	var cookie = $rootScope.globals.currentUser;
-	        var user = {};
-
-	        var p0 = UserService.GetByEmail(cookie.email);
+                var path = "http://localhost:8080/bitphoto/helloworld";
+	    	var p0 = $http.get(path).success(function (response) {
+                    callback(response);
+                });
 
 	        return $q.all([p0]).then(function(res) {
 	        	var retorno = res[0];
