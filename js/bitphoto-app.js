@@ -37,9 +37,9 @@
             */
 			
             otherwise({redirectTo: '/'});
-	}]);
+    }]);
 
-	app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
+    app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
        	// keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
@@ -49,7 +49,7 @@
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/', '/registro']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/', '/registro','/hola']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/');
@@ -57,10 +57,11 @@
         });
     }]);
 
-	app.directive('loadComponent', function() {
-    return {
-		templateUrl: function(elem, attr){
-      		return attr.route;
-		}
-    }});
+    app.directive('loadComponent', function() {
+        return {
+            templateUrl: function(elem, attr){
+                return attr.route;
+            }
+        }
+    });
 })();

@@ -82,11 +82,12 @@
             $scope.comentarios = {};
 	});
 
-	app.controller('AlbumCtrl', function($scope, $stateParams) {
-            $scope.variable = "";
+	app.controller('AlbumCtrl', function($scope, PhotoService) {
+            PhotoService.getTest().then(function(f){ $scope.albums = f; });
 	});
         
-        app.controller('HolaCtrl', function($scope, HolaService) {
-            HolaService.getHola().then(function(f){ $scope.mensaje = f });
+        app.controller('HolaCtrl', function($scope, TestService) {
+            TestService.getHola().then(function(f){ $scope.mensaje = f; });
+            TestService.getAlbum().then(function(f){ $scope.album = f; });
 	});
 })();

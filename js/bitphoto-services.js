@@ -16,20 +16,43 @@
 		};
 	});
         
-        app.service('HolaService', function($http, $q) {
-	    this.getHola = function() {
-                var path = "http://localhost:8080/bitphoto/helloworld";
-	    	var p0 = $http.get(path).success(function (response) {
-                    callback(response);
-                });
+        app.service('TestService', function($http, $q) {
+            var basepath = "http://localhost:8080/bitphoto/";
+            
+            this.getHola = function() {
+                var path = basepath + "helloworld";
+	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {
-	        	var retorno = res[0];
-				console.log(retorno);
-				return retorno;
-			});
-		};
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+            
+            this.getAlbum = function() {
+                var path = basepath + "albumes";
+	    	var p0 = $http.get(path);
+
+	        return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
 	});
+        
+        app.service('PhotoService', function($http, $q) {
+            var basepath = "http://localhost:8080/bitphoto/";
+            
+            this.getTest = function() {
+                var path = basepath + "albumes";
+	    	var p0 = $http.get(path);
+
+	        return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+        });
 
 	app.factory('UserDataFactory', function(GetterService) {
 		return {

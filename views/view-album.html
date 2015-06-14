@@ -1,8 +1,19 @@
 <div load-component route="components/header.html"></div>
 
- <main class="sitio-contenido">
-    <div id="bp-content">
-    	<div load-component route="components/homegallery.html"></div>
+<main class="sitio-contenido">
+    <div id="bp-content" class="container">
+    	<div class="row">
+            <h1>AlbumTest <small>Test de Álbumes</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3 portfolio-item" ng-repeat="album in albums track by album.idAlbum">
+                <a href="#">
+                    <img class="thumbnail center-div img-responsive" src={{album.urlfotoalbum}} alt={{album.urlfotoalbum}}>
+                </a>
+                <span class="pull-left">{{album.nombre}}</span>
+                <span class="pull-right"><i class="fa fa-picture-o"></i> {{album.cantFoto}} · <i class="fa fa-thumbs-o-up"></i> {{album.cantFav}}</span>
+            </div>
+        </div>
     </div>
 </main>
 
