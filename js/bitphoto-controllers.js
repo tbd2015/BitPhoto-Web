@@ -83,11 +83,12 @@
 	});
 
 	app.controller('AlbumCtrl', function($scope, PhotoService) {
-            PhotoService.getTest().then(function(f){ $scope.albums = f; });
+            
 	});
         
-        app.controller('HolaCtrl', function($scope, TestService) {
+        app.controller('TestCtrl', function($scope, TestService, PhotoService) {
             TestService.getHola().then(function(f){ $scope.mensaje = f; });
             TestService.getAlbum().then(function(f){ $scope.album = f; });
+            PhotoService.getTest().then(function(f){ $scope.albums = f; });
 	});
 })();

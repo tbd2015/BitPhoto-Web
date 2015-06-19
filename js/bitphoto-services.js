@@ -16,11 +16,9 @@
 		};
 	});
         
-        app.service('TestService', function($http, $q) {
-            var basepath = "http://localhost:8080/bitphoto/";
-            
+        app.service('TestService', function($http, $q, parms) {            
             this.getHola = function() {
-                var path = basepath + "helloworld";
+                var path = parms.serverPath + "helloworld";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {
@@ -30,7 +28,7 @@
             };
             
             this.getAlbum = function() {
-                var path = basepath + "albumes";
+                var path = parms.serverPath + "albumes";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {
@@ -40,11 +38,9 @@
             };
 	});
         
-        app.service('PhotoService', function($http, $q) {
-            var basepath = "http://localhost:8080/bitphoto/";
-            
+        app.service('PhotoService', function($http, $q, parms) {            
             this.getTest = function() {
-                var path = basepath + "albumes";
+                var path = parms.serverPath + "albumes";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {

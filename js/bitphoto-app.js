@@ -1,5 +1,9 @@
 (function(){
-	var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
+    var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
+    
+    app.value('parms', {
+        serverPath: "http://localhost:8080/bitphoto/"
+    });
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
@@ -26,7 +30,8 @@
             when('/foto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album', {templateUrl: 'views/view-album.html',   controller: 'AlbumCtrl'}).
             
-            when('/hola', {templateUrl: 'views/holamundo.html',   controller: 'HolaCtrl'}).
+            when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'TestCtrl'}).
+            when('/testalbum', {templateUrl: 'views/view-album.html',   controller: 'TestCtrl'}).
 
             /*
             when('/demo', {templateUrl: 'demo.html',   controller: 'DemoCtrl'}).
@@ -49,7 +54,7 @@
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/', '/registro','/hola']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/', '/registro','/testhola','/testalbum']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/');

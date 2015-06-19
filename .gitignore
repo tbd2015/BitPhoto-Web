@@ -1,3 +1,6 @@
 /node_modules
-.directory
 /nbproject/private/
+/fotos
+/fotosAvatar
+/fotosPerfil
+.directory

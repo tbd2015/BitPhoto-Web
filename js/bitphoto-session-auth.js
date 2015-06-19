@@ -5,10 +5,9 @@
         .module('bitphoto-app')
         .factory('AuthenticationService', AuthenticationService);
  
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService', 'parms'];
+    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService, parms) {
         var service = {};
-        var serverUrl = "http://localhost:4400";
  
         service.Login = Login;
         service.SetCredentials = SetCredentials;
@@ -20,30 +19,31 @@
  
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            
+            /*
             $timeout(function () {
                 var response;
                 UserService.GetByEmail(email)
                     .then(function (user) {
                         if (user !== null && user.password === password) {
-                            console.log("jai!");
+                            console.log("BP-LOG: Login exitoso!");
                             response = { success: true };
                         } else {
-                            console.log("nai!");
-                            response = { success: false, message: 'Email or password is incorrect' };
+                            console.log("BP-LOG: Login inválido!");
+                            response = { success: false, message: 'Correo o contraseña incorrectos' };
                         }
                         callback(response);
                     });
             }, 1000);
-            
+            */
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            /*$http.get(serverUrl + '/usuarios', params: { email: email })
-                .success(function (response) {
+            //$http.get(parms.serverPath + 'login', { email: email, pass: password })
+            $http.post(parms.serverPath + 'login', { correo: email, contrasena: password })
+                .success(function(response) {
+                    console.log(response);
                     callback(response);
-                });*/
+                });
  
         }
  

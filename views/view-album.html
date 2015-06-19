@@ -8,10 +8,10 @@
         <div class="row">
             <div class="col-md-3 portfolio-item" ng-repeat="album in albums track by album.idAlbum">
                 <a href="#">
-                    <img class="thumbnail center-div img-responsive" src={{album.urlfotoalbum}} alt={{album.urlfotoalbum}}>
+                    <img class="thumbnail center-div img-responsive" alt={{album.nombre}} title={{album.descripcion}} src={{album.urlfotoalbum}}>
                 </a>
                 <span class="pull-left">{{album.nombre}}</span>
-                <span class="pull-right"><i class="fa fa-picture-o"></i> {{album.cantFoto}} · <i class="fa fa-thumbs-o-up"></i> {{album.cantFav}}</span>
+                <span class="pull-right"><i class="fa fa-picture-o"></i> {{album.cantFoto}} · <i class="fa fa-thumbs-o-up"></i> {{album.cantFav}} · <i class="fa fa-comment-o"></i> {{album.cantComentarios}}</span>
             </div>
         </div>
     </div>
