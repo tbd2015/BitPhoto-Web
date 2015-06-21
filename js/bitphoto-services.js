@@ -18,7 +18,7 @@
         
         app.service('TestService', function($http, $q, parms) {            
             this.getHola = function() {
-                var path = parms.serverPath + "helloworld";
+                var path = parms.serverPath + "/helloworld";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {
@@ -28,7 +28,7 @@
             };
             
             this.getAlbum = function() {
-                var path = parms.serverPath + "albumes";
+                var path = parms.serverPath + "/albumes";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {
@@ -40,7 +40,7 @@
         
         app.service('PhotoService', function($http, $q, parms) {            
             this.getTest = function() {
-                var path = parms.serverPath + "albumes";
+                var path = parms.serverPath + "/albumes";
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {

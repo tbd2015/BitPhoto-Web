@@ -38,11 +38,16 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.get(parms.serverPath + 'login/' + email + '/' + password)
+            $http.get(parms.serverPath + '/login/' + email + '/' + password)
                 .success(function(response) {
-                    //console.log(email + " " + password);
-                    //console.log(response);
                     callback(response);
+                    /*if (response.success) {
+                        console.log("BP-LOG: Login exitoso!");
+                        callback(response);
+                    }
+                    else {
+                        console.log("BP-LOG: Login inválido!");
+                    }*/
                 });
  
         }

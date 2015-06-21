@@ -5,11 +5,10 @@
         .module('bitphoto-app')
         .factory('UserService', UserService);
  
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http', 'md5', 'parms'];
+    function UserService($http, md5, parms) {
         var service = {};
-        var serverUrl = "http://localhost:4400";
- 
+         
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -21,24 +20,27 @@
         return service;
  
         function GetAll() {
-            return $http.get(serverUrl + '/usuarios').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get(parms.serverPath + '/usuarios').then(handleSuccess, handleError('Error getting all users'));
         }
  
         function GetById(id) {
-            return $http.get(serverUrl + '/usuarios/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get(parms.serverPath + '/usuarios/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByEmail(email) {
-            return $http.get(serverUrl + '/usuarios', { params: { email: email } } ).then(handleSuccess, handleError('Error getting user by email'));
+            return $http.get(parms.serverPath + '/usuarios', { params: { email: email } } ).then(handleSuccess, handleError('Error getting user by email'));
             //return $http.get(serverUrl + '/usuarios/' + email).then(handleSuccess, handleError('Error getting user by email'));
         }
  
         function GetByUsername(username) {
-            return $http.get(serverUrl + '/usuarios', { params: { username: username } }).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get(parms.serverPath + '/usuarios', { params: { username: username } }).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
-            return $http.post(serverUrl + '/usuarios', user).then(handleSuccess, handleError('Error creating user'));
+            var u = user;
+            u.password = md5.createHash(user.password);
+            console.log(u);
+            return $http.post(parms.serverPath + '/register', u).then(handleSuccess, handleError('Error creating user'));
         }
  
         function Update(user) {
@@ -52,7 +54,7 @@
         // private functions
  
         function handleSuccess(data) {
-            return data;
+            return data.data;
         }
  
         function handleError(error) {

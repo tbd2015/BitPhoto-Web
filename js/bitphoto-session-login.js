@@ -5,11 +5,13 @@
         .module('bitphoto-app')
         .controller('LoginController', LoginController);
  
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService', 'md5'];
-    function LoginController($location, AuthenticationService, FlashService, md5) {
+    LoginController.$inject = ['$scope', '$location', 'AuthenticationService', 'FlashService', 'md5'];
+    function LoginController($scope, $location, AuthenticationService, FlashService, md5) {
         var vm = this;
  
         vm.login = login;
+        
+        vm.mensaje = "";
  
         (function initController() {
             // reset login status
@@ -21,10 +23,15 @@
             vm.hashedPassword = md5.createHash(vm.password);
             AuthenticationService.Login(vm.email, vm.hashedPassword, function (response) {
                 if (response.success) {
+                    console.log("BP-LOG: Login exitoso!");
                     AuthenticationService.SetCredentials(vm.email, vm.password);
+                    $scope.mensaje = "Login exitoso!";
                     $location.path('/portada');
+                    vm.dataLoading = false;
                 } else {
+                    console.log("BP-LOG: Login inválido!");
                     FlashService.Error(response.message);
+                    $scope.mensaje = response.message;
                     vm.dataLoading = false;
                 }
             });
