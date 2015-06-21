@@ -38,10 +38,10 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.get(parms.serverPath + 'login', { email: email, pass: password })
-            $http.post(parms.serverPath + 'login', { correo: email, contrasena: password })
+            $http.get(parms.serverPath + 'login/' + email + '/' + password)
                 .success(function(response) {
-                    console.log(response);
+                    //console.log(email + " " + password);
+                    //console.log(response);
                     callback(response);
                 });
  
