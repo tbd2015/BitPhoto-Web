@@ -2,7 +2,7 @@
     var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
     
     app.value('parms', {
-        serverPath: "http://localhost:8080/bitphoto"
+        serverPath: "http://localhost:8080/BitPhoto"
     });
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
