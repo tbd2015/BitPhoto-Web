@@ -27,8 +27,8 @@
 
             when('/subida', {templateUrl: 'views/upload.html',   controller: 'UploadCtrl'}).
 
-            when('/foto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
-            when('/album', {templateUrl: 'views/view-album.html',   controller: 'AlbumCtrl'}).
+            when('/foto/:id', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
+            when('/album/:id', {templateUrl: 'views/view-album.html',   controller: 'AlbumCtrl'}).
             
             when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'TestCtrl'}).
             when('/testalbum', {templateUrl: 'views/view-album.html',   controller: 'TestCtrl'}).
@@ -48,7 +48,7 @@
        	// keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
-        	//console.log($rootScope.globals.currentUser);
+            //console.log($rootScope.globals.currentUser);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }
  

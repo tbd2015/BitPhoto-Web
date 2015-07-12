@@ -23,8 +23,8 @@
             vm.hashedPassword = md5.createHash(vm.password);
             AuthenticationService.Login(vm.email, vm.hashedPassword, function (response) {
                 if (response.success) {
-                    console.log("BP-LOG: Login exitoso!");
                     AuthenticationService.SetCredentials(vm.email, vm.password);
+                    console.log("BP-LOG: Login exitoso!");
                     $scope.mensaje = "Login exitoso!";
                     $location.path('/portada');
                     vm.dataLoading = false;

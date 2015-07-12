@@ -2,7 +2,8 @@
 	var app = angular.module('bitphoto-services',[]);
 
 	app.service('GetterService', function($q, $rootScope, UserService) {
-	    this.getUser = function() {
+	    /*
+            this.getUser = function() {     // DEPRECADA
 	    	var cookie = $rootScope.globals.currentUser;
 	        var user = {};
 
@@ -14,6 +15,17 @@
 				return retorno;
 			});
 		};
+            */
+            
+            this.getEmail = function() {
+	    	var cookie = $rootScope.globals.currentUser;
+	        return cookie.email;
+            };
+            
+            this.getAuthData = function() {
+	    	var cookie = $rootScope.globals.currentUser;
+	        return cookie.authdata;
+            };
 	});
         
         app.service('TestService', function($http, $q, parms) {            
@@ -38,9 +50,31 @@
             };
 	});
         
-        app.service('PhotoService', function($http, $q, parms) {            
+        app.service('PhotoService', function($http, $q, parms, GetterService) {            
             this.getTest = function() {
                 var path = parms.serverPath + "/albumes";
+	    	var p0 = $http.get(path);
+
+	        return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+            
+            this.getPhotostream = function() {
+                var email = GetterService.getEmail();
+                var path = parms.serverPath + "/photoStream/" + email;
+	    	var p0 = $http.get(path);
+
+	        return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+            
+            this.getPhoto = function(num) {
+                var email = GetterService.getEmail();
+                var path = parms.serverPath + "/photo/" + email + "/" + num;
 	    	var p0 = $http.get(path);
 
 	        return $q.all([p0]).then(function(res) {

@@ -39,7 +39,7 @@
         function Create(user) {
             var u = user;
             u.contrasena = md5.createHash(user.contrasena);
-            console.log(u);
+            //console.log(u);
             return $http.post(parms.serverPath + '/register', u).then(handleSuccess, handleError('Error creating user'));
         }
  

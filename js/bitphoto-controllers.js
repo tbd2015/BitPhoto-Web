@@ -46,10 +46,12 @@
 	});
 
 	app.controller('UserCtrl', function($scope, UserDataFactory) {
-	    UserDataFactory.nombre().then(function(f){ $scope.nombre = f });
+	    /*
+            UserDataFactory.nombre().then(function(f){ $scope.nombre = f });
 	    UserDataFactory.apellido().then(function(f){ $scope.apellido = f });
 	    UserDataFactory.apodo().then(function(f){ $scope.apodo = f });
 	    UserDataFactory.descripcion().then(function(f){ $scope.descripcion = f });
+             */
 	});
 
 	app.controller('HomeCtrl', function($scope) {
@@ -60,7 +62,9 @@
             $scope.variable = "";
 	});
 
-	app.controller('PhotoCtrl', function($scope) {
+	app.controller('PhotoCtrl', function($scope, PhotoService) {
+            PhotoService.getPhoto().then(function(f){ $scope.peticion = f; });
+            
             $scope.tituloImagen = "Foto";
             $scope.autorImagen = "Juan Pérez";
             $scope.descripcionImagen = "holi";
@@ -80,6 +84,23 @@
             $scope.zoomCamara = "";
 
             $scope.comentarios = {};
+	});
+        
+        app.controller('PhotostreamCtrl', function($scope, PhotoService) {
+            PhotoService.getPhotostream().then(function(f){ $scope.respuesta = f.photos; });
+            
+            //console.log($scope.respuesta);
+            //console.log($scope.respuesta.photos);
+                        
+            
+            /*
+            angular.forEach($scope.respuesta.photos.photo, function(nuevoUrl) {
+                nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
+            });
+            */
+            
+            
+            //$scope.peticion = $scope.respuesta;
 	});
 
 	app.controller('AlbumCtrl', function($scope, PhotoService) {

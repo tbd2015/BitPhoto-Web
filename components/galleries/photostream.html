@@ -1,0 +1,49 @@
+<div class="container" ng-controller="PhotostreamCtrl">
+    <div class="row">
+        <!-- Page Content -->
+        <div class="container">
+            <pre>{{respuesta | json:4}}</pre>
+            <!-- Projects Row -->
+            <div class="row">
+                <div class="col-md-3 portfolio-item" ng-repeat="foto in respuesta.photo track by foto.idfoto">
+                    <a href="{{foto.urlacceso}}">
+                        <img class="thumbnail center-div img-responsive" src="{{foto.urlserver}}" alt="{{foto.titulo}}">
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <hr>
+
+            <!-- Pagination -->
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+</div>
