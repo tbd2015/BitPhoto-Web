@@ -63,27 +63,29 @@
 	});
 
 	app.controller('PhotoCtrl', function($scope, PhotoService) {
-            PhotoService.getPhoto().then(function(f){ $scope.peticion = f; });
-            
-            $scope.tituloImagen = "Foto";
-            $scope.autorImagen = "Juan Pérez";
-            $scope.descripcionImagen = "holi";
+            PhotoService.getPhoto().then(function(f){ 
+                $scope.peticion = f;
+                
+                $scope.tituloImagen = "Foto";
+                $scope.autorImagen = "Juan Pérez";
+                $scope.descripcionImagen = "holi";
 
-            $scope.fechaTomadaImagen = "03/12/2014";
-            $scope.fechaSubidaImagen = "04/12/2014";
-            $scope.urlImagen = "http://lorempixel.com/640/480/cats/";
+                $scope.fechaTomadaImagen = "03/12/2014";
+                $scope.fechaSubidaImagen = "04/12/2014";
+                $scope.urlImagen = "http://lorempixel.com/640/480/cats/";
 
-            $scope.visitasImagen = "";
-            $scope.favoritosImagen = "";
-            $scope.comentariosImagen = "";
-            $scope.permisosImagen = "";
+                $scope.visitasImagen = "";
+                $scope.favoritosImagen = "";
+                $scope.comentariosImagen = "";
+                $scope.permisosImagen = "";
 
-            $scope.marcaCamara = "";
-            $scope.nombreCamara = "";
-            $scope.resCamara = "";
-            $scope.zoomCamara = "";
+                $scope.marcaCamara = "";
+                $scope.nombreCamara = "";
+                $scope.resCamara = "";
+                $scope.zoomCamara = "";
 
-            $scope.comentarios = {};
+                $scope.comentarios = {};
+            });
 	});
         
         app.controller('PhotostreamCtrl', function($scope, PhotoService) {
@@ -96,14 +98,6 @@
                 
                 $scope.peticion = $scope.respuesta;
             });
-            
-            //console.log($scope.respuesta);
-            //console.log($scope.respuesta.photos);
-                        
-            
-                       
-            
-            
 	});
 
 	app.controller('AlbumCtrl', function($scope, PhotoService) {

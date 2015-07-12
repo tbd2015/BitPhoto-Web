@@ -2,7 +2,6 @@
     <div class="row">
         <!-- Page Content -->
         <div class="container">
-            <pre>{{peticion | json:4}}</pre>
             <!-- Projects Row -->
             <div class="row">
                 <div class="col-md-3 portfolio-item" ng-repeat="foto in peticion.photo track by foto.idfoto">
@@ -16,6 +15,7 @@
             <hr>
 
             <!-- Pagination -->
+            <!-- 
             <div class="row text-center">
                 <div class="col-lg-12">
                     <ul class="pagination">
@@ -43,7 +43,9 @@
                     </ul>
                 </div>
             </div>
+            -->
             <!-- /.row -->
+            <!-- <pre>{{peticion | json:4}}</pre> -->
         </div>
     </div>
 </div>
