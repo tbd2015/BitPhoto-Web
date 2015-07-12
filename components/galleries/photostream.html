@@ -2,10 +2,10 @@
     <div class="row">
         <!-- Page Content -->
         <div class="container">
-            <pre>{{respuesta | json:4}}</pre>
+            <pre>{{peticion | json:4}}</pre>
             <!-- Projects Row -->
             <div class="row">
-                <div class="col-md-3 portfolio-item" ng-repeat="foto in respuesta.photo track by foto.idfoto">
+                <div class="col-md-3 portfolio-item" ng-repeat="foto in peticion.photo track by foto.idfoto">
                     <a href="{{foto.urlacceso}}">
                         <img class="thumbnail center-div img-responsive" src="{{foto.urlserver}}" alt="{{foto.titulo}}">
                     </a>

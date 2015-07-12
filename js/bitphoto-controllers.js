@@ -87,20 +87,23 @@
 	});
         
         app.controller('PhotostreamCtrl', function($scope, PhotoService) {
-            PhotoService.getPhotostream().then(function(f){ $scope.respuesta = f.photos; });
+            PhotoService.getPhotostream().then(function(f){
+                $scope.respuesta = f.photos;
+                
+                angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
+                    nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
+                });            
+                
+                $scope.peticion = $scope.respuesta;
+            });
             
             //console.log($scope.respuesta);
             //console.log($scope.respuesta.photos);
                         
             
-            /*
-            angular.forEach($scope.respuesta.photos.photo, function(nuevoUrl) {
-                nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
-            });
-            */
+                       
             
             
-            //$scope.peticion = $scope.respuesta;
 	});
 
 	app.controller('AlbumCtrl', function($scope, PhotoService) {
