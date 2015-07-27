@@ -88,7 +88,7 @@
             });
 	});
         
-        app.controller('PhotostreamCtrl', function($scope, PhotoService) {
+    app.controller('PhotostreamCtrl', function($scope, PhotoService) {
             PhotoService.getPhotostream().then(function(f){
                 $scope.respuesta = f.photos;
                 
@@ -100,8 +100,16 @@
             });
 	});
 
-	app.controller('AlbumCtrl', function($scope, PhotoService) {
-            
+	app.controller('AlbumCtrl', function($scope, AlbumService) {
+            AlbumService.getAlbums().then(function(f){
+                $scope.respuesta = f.albumes;
+                
+                angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
+                    nuevoUrl.urlacceso = "#/album/" + nuevoUrl.idalbum;
+                });            
+                
+                $scope.peticion = $scope.respuesta;
+            });
 	});
         
         app.controller('TestCtrl', function($scope, TestService, PhotoService) {

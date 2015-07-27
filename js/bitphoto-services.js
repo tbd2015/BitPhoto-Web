@@ -84,6 +84,30 @@
             };
         });
 
+	app.service('AlbumService', function($http, $q, parms, GetterService) {            
+            this.getAlbums = function() {
+                var email = GetterService.getEmail();
+                var path = parms.serverPath + "/albumes/" + email;
+	    		var p0 = $http.get(path);
+
+	       		return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+            
+            this.getSingleAlbum = function(id) {
+                var email = GetterService.getEmail();
+                var path = parms.serverPath + "/albumes/" + email + "/" + id;
+	    		var p0 = $http.get(path);
+
+	        	return $q.all([p0]).then(function(res) {
+                    var retorno = res[0].data;
+                    return retorno;
+                });
+            };
+        });
+
 	app.factory('UserDataFactory', function(GetterService) {
 		return {
 			nombre: function() {
