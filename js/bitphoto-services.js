@@ -53,9 +53,9 @@
         app.service('PhotoService', function($http, $q, parms, GetterService) {            
             this.getTest = function() {
                 var path = parms.serverPath + "/albumes";
-	    	var p0 = $http.get(path);
+		    	var p0 = $http.get(path);
 
-	        return $q.all([p0]).then(function(res) {
+		        return $q.all([p0]).then(function(res) {
                     var retorno = res[0].data;
                     return retorno;
                 });
@@ -64,20 +64,20 @@
             this.getPhotostream = function() {
                 var email = GetterService.getEmail();
                 var path = parms.serverPath + "/photoStream/" + email;
-	    	var p0 = $http.get(path);
+		    	var p0 = $http.get(path);
 
-	        return $q.all([p0]).then(function(res) {
+		        return $q.all([p0]).then(function(res) {
                     var retorno = res[0].data;
                     return retorno;
                 });
             };
             
-            this.getPhoto = function(num) {
+            this.getHomePhotos = function(num) {
                 var email = GetterService.getEmail();
                 var path = parms.serverPath + "/photo/" + email + "/" + num;
-	    	var p0 = $http.get(path);
+		    	var p0 = $http.get(path);
 
-	        return $q.all([p0]).then(function(res) {
+		        return $q.all([p0]).then(function(res) {
                     var retorno = res[0].data;
                     return retorno;
                 });

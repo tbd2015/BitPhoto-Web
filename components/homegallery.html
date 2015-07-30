@@ -1,33 +1,20 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-9">
+        <div class="col-md-9 col-sm-9 col-xs-12">
             <br />
-            <div class="row">
-                <a href="#">
-                    <img src="images/placeholders/800x300.gif" class="thumbnail img-responsive img-home center-div">
-                </a>
+            <div class="row" ng-repeat="foto in peticion.photo track by foto.idfoto">
+                <div class="col-md-10 col-sm-10 col-xs-12 portfolio-item">
+                    <a href="{{foto.urlacceso}}">
+                        <img class="thumbnail img-home center-div" src="{{foto.urlserver}}" alt="{{foto.titulo}}">
+                        <span class="pull-left">{{foto.titulo}}</span>
+                        <span class="pull-right"><i class="fa fa-eye"></i> {{foto.views}} · <i class="fa fa-thumbs-o-up"></i> {{foto.favoritos}} · <i class="fa fa-comment-o"></i> {{foto.comentarios}}</span>
+                    </a>
+                </div>
+                <br />
+                <br />
             </div>
-            <br />
-            <div class="row">
-                <a href="#">
-                    <img src="images/placeholders/800x300.gif" class="thumbnail img-responsive img-home center-div">
-                </a>
-            </div>
-            <br />
-            <div class="row">
-                <a href="#">
-                    <img src="images/placeholders/800x300.gif" class="thumbnail img-responsive img-home center-div">
-                </a>
-            </div>
-            <br />
-            <div class="row">
-                <a href="#">
-                    <img src="images/placeholders/800x300.gif" class="thumbnail img-responsive img-home center-div">
-                </a>
-            </div>
-            <br />
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-12">
             <div id="featured">   
                 <h3>Noticias de BitPhoto</h3>
                 <hr />

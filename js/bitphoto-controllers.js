@@ -54,8 +54,20 @@
              */
 	});
 
-	app.controller('HomeCtrl', function($scope) {
-	    $scope.variable = "";
+	app.controller('IndexCtrl', function($scope) {
+        $scope.variable = "";
+	});
+
+	app.controller('HomeCtrl', function($scope, PhotoService) {
+        PhotoService.getHomePhotos(15).then(function(f){
+            $scope.respuesta = f.photos;
+                
+            angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
+                nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
+            });
+            
+            $scope.peticion = $scope.respuesta;
+        });
 	});
 
 	app.controller('UploadCtrl', function($scope) {
@@ -94,7 +106,7 @@
                 
                 angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
                     nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
-                });            
+                });    
                 
                 $scope.peticion = $scope.respuesta;
             });

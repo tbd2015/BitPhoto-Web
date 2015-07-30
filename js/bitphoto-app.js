@@ -7,16 +7,16 @@
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
-            when('/', {templateUrl: 'views/indexguest.html',   controller: 'HomeCtrl'}).
-            when('/registro', {templateUrl: 'views/register.html',   controller: 'HomeCtrl'}).
+            when('/', {templateUrl: 'views/indexguest.html',   controller: 'IndexCtrl'}).
+            when('/registro', {templateUrl: 'views/register.html',   controller: 'IndexCtrl'}).
             when('/portada', {templateUrl: 'views/home.html',   controller: 'HomeCtrl'}).
 
-            when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'UserCtrl'}).
-            when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'UserCtrl'}).
-            when('/albumes', {templateUrl: 'views/albums.html',   controller: 'UserCtrl'}).
-            when('/mapa', {templateUrl: 'views/map.html',   controller: 'UserCtrl'}).
-            when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'UserCtrl'}).
-            when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'UserCtrl'}).
+            when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
+            when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'CameraRollCtrl'}).
+            when('/albumes', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
+            when('/mapa', {templateUrl: 'views/map.html',   controller: 'MapCtrl'}).
+            when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
+            when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'RecentCtrl'}).
 
             when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
             when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'HomeCtrl'}).
