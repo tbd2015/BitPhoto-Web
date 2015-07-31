@@ -3,15 +3,25 @@
  <main class="sitio-contenido">
     <div id="bp-content">
         <div load-component route="components/profileheader.html"></div>
+
+        <div class="container">
+	        <div class="row no-margin">
+	            <ul class="nav nav-tabs margin">
+	                <li role="presentation">
+	                    <a href="#/photostream"><i class="fa fa-picture-o fa-md"></i> Photostream</a>
+	                </li>
+	                <li role="presentation">
+	                    <a href="#/albumes"><i class="fa fa-folder-open-o fa-md"></i> Álbumes</a>
+	                </li>
+	                <li role="presentation" class="active">
+	                    <a href="#/favoritas"><i class="fa fa-heart-o fa-md"></i> Favoritas</a>
+	                </li>
+	            </ul>
+	        </div>
+        </div>
+
         <div load-component route="components/genericgallery.html"></div>   
     </div>
 </main>
 
 <div load-component route="components/footer.html"></div>
-
-<script type="text/javascript">
-	$("#bp-header").load("components/header.html");
-    $("#bp-profileheader").load("components/profileheader.html");
-    $("#bp-genericgallery").load("components/genericgallery.html");
-	$("#bp-footer").load("components/footer.html");
-</script>

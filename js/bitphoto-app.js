@@ -2,7 +2,10 @@
     var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
     
     app.value('parms', {
-        serverPath: "http://localhost:8080/BitPhoto"
+        localServerPath: "http://localhost:8080/BitPhoto",
+        remoteServerPath: "http://bitphoto-tbd2015.rhcloud.com/bitphoto",
+        serverPath: "http://localhost:8080/BitPhoto",
+        fotosPortada: 15
     });
 
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
@@ -27,11 +30,12 @@
 
             when('/subida', {templateUrl: 'views/upload.html',   controller: 'UploadCtrl'}).
 
-            when('/foto/:id', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
-            when('/album/:id', {templateUrl: 'views/view-album.html',   controller: 'AlbumCtrl'}).
+            when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
+            when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
             
             when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'TestCtrl'}).
             when('/testalbum', {templateUrl: 'views/view-album.html',   controller: 'TestCtrl'}).
+            when('/query', {templateUrl: 'views/query.html',   controller: 'TestCtrl'}).
 
             /*
             when('/demo', {templateUrl: 'demo.html',   controller: 'DemoCtrl'}).
@@ -54,7 +58,7 @@
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/', '/registro','/testhola','/testalbum']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/','/registro','/testhola','/testalbum','/query']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/');

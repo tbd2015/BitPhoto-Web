@@ -58,8 +58,8 @@
         $scope.variable = "";
 	});
 
-	app.controller('HomeCtrl', function($scope, PhotoService) {
-        PhotoService.getHomePhotos(15).then(function(f){
+	app.controller('HomeCtrl', function($scope, parms, PhotoService) {
+        PhotoService.getHomePhotos(parms.fotosPortada).then(function(f){
             $scope.respuesta = f.photos;
                 
             angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
@@ -116,17 +116,40 @@
             AlbumService.getAlbums().then(function(f){
                 $scope.respuesta = f.albumes;
                 
-                angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
+                angular.forEach($scope.respuesta.album, function(nuevoUrl) {
                     nuevoUrl.urlacceso = "#/album/" + nuevoUrl.idalbum;
                 });            
                 
                 $scope.peticion = $scope.respuesta;
             });
 	});
-        
-        app.controller('TestCtrl', function($scope, TestService, PhotoService) {
-            TestService.getHola().then(function(f){ $scope.mensaje = f; });
-            TestService.getAlbum().then(function(f){ $scope.album = f; });
-            PhotoService.getTest().then(function(f){ $scope.albums = f; });
+
+	app.controller('AlbumPhotosCtrl', function($scope, $routeParams, AlbumService) {
+			$scope.iden = $routeParams.idalbum;
+            AlbumService.getAlbumPhotos($routeParams.idalbum).then(function(f){
+            	$scope.titulo = f.album.nombre_album;
+            	$scope.descripcion = f.album.descripcion;
+                $scope.respuesta = f.album;
+                
+                angular.forEach($scope.respuesta.fotos, function(nuevoUrl) {
+                    nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
+                });            
+                
+                $scope.peticion = $scope.respuesta;
+            });
 	});
+        
+    app.controller('TestCtrl', function($scope, TestService) {
+        TestService.getHola().then(function(f){ $scope.mensaje = f; });
+        //TestService.getAlbum().then(function(f){ $scope.album = f; });
+        //PhotoService.getTest().then(function(f){ $scope.albums = f; });
+
+        $scope.localQuery = function(query) {
+        	TestService.getLocalQuery(query).then(function(f){ $scope.respuestaLocal = f; });	
+        }
+        
+        $scope.remoteQuery = function(query) {
+        	TestService.getRemoteQuery(query).then(function(f){ $scope.respuestaRemota = f; });
+        }
+    });
 })();

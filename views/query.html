@@ -1,0 +1,28 @@
+<div class="container-fluid">
+	<h1>Consultador GET de BitPhoto</h1>
+
+	<div class="row">
+		<h2>Consulta Local:</h2>
+		<div>
+			<form novalidate class="simple-form">
+				http://localhost:8080/BitPhoto/<input type="text" ng-model="local"/>
+				<input type="submit" ng-click="localQuery(local)" value="Consultar" />
+			</form>
+			<br/>
+			<pre>{{respuestaLocal | json:4}}</pre>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<h2>Consulta Remota:</h2>
+		<div>
+			<form novalidate class="simple-form">
+				http://bitphoto-tbd2015.rhcloud.com/bitphoto/<input type="text" ng-model="remote"/>
+				<input type="submit" ng-click="remoteQuery(remote)" value="Consultar" />
+			</form>
+			<br/>
+			<pre>{{respuestaRemota | json:4}}</pre>
+		</div>
+	</div>
+</div>
