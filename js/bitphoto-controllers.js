@@ -46,12 +46,18 @@
 	});
 
 	app.controller('UserCtrl', function($scope, UserDataFactory) {
-	    /*
-            UserDataFactory.nombre().then(function(f){ $scope.nombre = f });
-	    UserDataFactory.apellido().then(function(f){ $scope.apellido = f });
-	    UserDataFactory.apodo().then(function(f){ $scope.apodo = f });
-	    UserDataFactory.descripcion().then(function(f){ $scope.descripcion = f });
-             */
+        UserDataFactory.getUser().then(function(f){
+            $scope.nombre = f.nombre;
+            $scope.apellido = f.apellido;
+            $scope.apodo = f.apodo;
+            $scope.descripcion = f.descripcion;
+            $scope.imgavatar = f.urlfoto;
+            $scope.imgcover = f.urlperfil;
+
+            if ($scope.imgcover || $scope.imgcover==="") {
+                $scope.imgcover = "images/users/wall/user002.jpg";
+            }
+        });
 	});
 
 	app.controller('IndexCtrl', function($scope) {
@@ -74,27 +80,30 @@
             $scope.variable = "";
 	});
 
-	app.controller('PhotoCtrl', function($scope, PhotoService) {
-            PhotoService.getPhoto().then(function(f){ 
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
+            PhotoService.getPhoto($routeParams.idfoto).then(function(f){ 
                 $scope.peticion = f;
                 
-                $scope.tituloImagen = "Foto";
-                $scope.autorImagen = "Juan Pérez";
-                $scope.descripcionImagen = "holi";
+                $scope.tituloImagen = f.Titulo;
+                $scope.descripcionImagen = f.Descripcion;
 
-                $scope.fechaTomadaImagen = "03/12/2014";
-                $scope.fechaSubidaImagen = "04/12/2014";
-                $scope.urlImagen = "http://lorempixel.com/640/480/cats/";
+                $scope.fechaTomadaImagen = f.fecha_toma;
+                $scope.fechaSubidaImagen = f.fecha_carga;
+                $scope.urlImagen = f.Url;
 
-                $scope.visitasImagen = "";
-                $scope.favoritosImagen = "";
-                $scope.comentariosImagen = "";
+                $scope.visitasImagen = f.Vistas;
+                $scope.favoritosImagen = f.Cantidad_favoritos;
+                $scope.comentariosImagen = f.Cantidad_comentarios;
                 $scope.permisosImagen = "";
 
                 $scope.marcaCamara = "";
                 $scope.nombreCamara = "";
                 $scope.resCamara = "";
                 $scope.zoomCamara = "";
+
+                UserDataFactory.id2username(f.IdUsuario).then(function(g) {
+                    $scope.autorImagen = g;
+                });
 
                 $scope.comentarios = {};
             });

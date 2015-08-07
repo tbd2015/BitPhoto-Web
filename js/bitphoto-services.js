@@ -1,7 +1,7 @@
 (function(){
 	var app = angular.module('bitphoto-services',[]);
 
-	app.service('GetterService', function($q, $rootScope, UserService) {
+	app.service('GetterService', function($rootScope, UserService) {
 		this.getEmail = function() {
 			var cookie = $rootScope.globals.currentUser;
 			return cookie.email;
@@ -66,6 +66,17 @@
 			});
 		};
 
+		this.getPhoto = function(id) {
+			var email = GetterService.getEmail();
+			var path = parms.serverPath + "/photo/get/" + id;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+
 		this.getPhotostream = function() {
 			var email = GetterService.getEmail();
 			var path = parms.serverPath + "/photoStream/" + email;
@@ -89,7 +100,7 @@
 		};
 	});
 
-	app.service('AlbumService', function($http, $q, parms, GetterService) {            
+	app.service('AlbumService', function($http, $q, parms, GetterService) {
 		this.getAlbums = function() {
 			var email = GetterService.getEmail();
 			var path = parms.serverPath + "/albumes/" + email;
@@ -113,43 +124,40 @@
 		};
 	});
 
-	app.factory('UserDataFactory', function(GetterService) {
+	app.factory('UserDataFactory', function($http, parms, GetterService) {
 		return {
-			nombre: function() {
-				promise = GetterService.getUser();
-				return promise.then(function(f) {
-					return f.nombre;
+			getUser: function() {
+				var email = GetterService.getEmail();
+				var path = parms.serverPath + "/user/" + email;
+				var promise = $http.get(path);
+
+				return promise.then(function(ret) {
+					return ret.data;
 				}, function (error) {
 					console.log(error);
-					return null;
+					return "";
 				});
 			},
-			apellido: function() {
-				promise = GetterService.getUser();
-				return promise.then(function(f) {
-					return f.apellido;
+			id2username: function(id) {
+				var path = parms.serverPath + "/user/id/" + id;
+				var promise = $http.get(path);
+
+				return promise.then(function(ret) {
+					var nombre = ret.data.nombre + " " +ret.data.apellido;
+					var apodo = ret.data.alias;
+					return nombre + " (" + apodo +")";
 				}, function (error) {
 					console.log(error);
-					return null;
+					return "";
 				});
-			},
-			apodo: function() {
-				promise = GetterService.getUser();
-				return promise.then(function(f) {
-					return f.apodo;
-				}, function (error) {
-					console.log(error);
-					return null;
-				});
-			},
-			descripcion: function() {
-				promise = GetterService.getUser();
-				return promise.then(function(f) {
-					return f.descripcion;
-				}, function (error) {
-					console.log(error);
-					return null;
-				});
+			}
+		};
+	});
+
+	app.factory('CameraDataFactory', function($http, parms, GetterService) {
+		return {
+			getCamera: function(id) {
+				return null;
 			}
 		};
 	});
