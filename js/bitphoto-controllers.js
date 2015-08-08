@@ -49,12 +49,12 @@
         UserDataFactory.getUser().then(function(f){
             $scope.nombre = f.nombre;
             $scope.apellido = f.apellido;
-            $scope.apodo = f.apodo;
+            $scope.apodo = f.alias;
             $scope.descripcion = f.descripcion;
             $scope.imgavatar = f.urlfoto;
             $scope.imgcover = f.urlperfil;
 
-            if ($scope.imgcover || $scope.imgcover==="") {
+            if (!($scope.imgcover) || $scope.imgcover==="") {
                 $scope.imgcover = "images/users/wall/user002.jpg";
             }
         });
@@ -81,9 +81,7 @@
 	});
 
 	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
-            PhotoService.getPhoto($routeParams.idfoto).then(function(f){ 
-                $scope.peticion = f;
-                
+            PhotoService.getPhoto($routeParams.idfoto).then(function(f){
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
 
@@ -104,13 +102,29 @@
                 UserDataFactory.id2username(f.IdUsuario).then(function(g) {
                     $scope.autorImagen = g;
                 });
-
-                $scope.comentarios = {};
             });
+
+            PhotoService.getPhotoComments($routeParams.idfoto).then(function(f) {
+                $scope.comentarios = f;
+
+                angular.forEach($scope.comentarios, function(comm) {
+                    UserDataFactory.id2user(comm.IdUsuario).then(function(g) {
+                        comm.usuario = g.nombre + " " + g.apellido + " (" + g.alias + ")";
+                        comm.avatar = g.urlfoto;
+                    });                    
+                });
+            });                
 	});
         
-    app.controller('PhotostreamCtrl', function($scope, PhotoService) {
-            PhotoService.getPhotostream().then(function(f){
+    app.controller('PhotostreamCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
+            if ($routeParams.id) {
+                $scope.idpeticion = $routeParams.id;    
+            }
+            else {
+                $scope.idpeticion = "";
+            }
+
+            PhotoService.getPhotostream($routeParams.id).then(function(f) {
                 $scope.respuesta = f.photos;
                 
                 angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
@@ -119,10 +133,30 @@
                 
                 $scope.peticion = $scope.respuesta;
             });
+
+            UserDataFactory.getUserProfile($routeParams.id).then(function(f) {
+                $scope.nombre = f.nombre;
+                $scope.apellido = f.apellido;
+                $scope.apodo = f.alias;
+                $scope.descripcion = f.descripcion;
+                $scope.imgavatar = f.urlfoto;
+                $scope.imgcover = f.urlperfil;
+
+                if (!($scope.imgcover) || $scope.imgcover==="") {
+                    $scope.imgcover = "images/users/wall/user002.jpg";
+                }
+            });
 	});
 
-	app.controller('AlbumCtrl', function($scope, AlbumService) {
-            AlbumService.getAlbums().then(function(f){
+	app.controller('AlbumCtrl', function($scope, $routeParams, AlbumService, UserDataFactory) {
+            if ($routeParams.id) {
+                $scope.idpeticion = $routeParams.id;    
+            }
+            else {
+                $scope.idpeticion = "";
+            }
+
+            AlbumService.getAlbums($routeParams.id).then(function(f){
                 $scope.respuesta = f.albumes;
                 
                 angular.forEach($scope.respuesta.album, function(nuevoUrl) {
@@ -131,7 +165,32 @@
                 
                 $scope.peticion = $scope.respuesta;
             });
+
+            UserDataFactory.getUserProfile($routeParams.id).then(function(f) {
+                $scope.nombre = f.nombre;
+                $scope.apellido = f.apellido;
+                $scope.apodo = f.alias;
+                $scope.descripcion = f.descripcion;
+                $scope.imgavatar = f.urlfoto;
+                $scope.imgcover = f.urlperfil;
+
+                if (!($scope.imgcover) || $scope.imgcover==="") {
+                    $scope.imgcover = "images/users/wall/user002.jpg";
+                }
+            });
 	});
+
+    app.controller('OtherUserCtrl', function($scope, $routeParams, PhotoService) {
+            PhotoService.getUserProfile($routeParams.idusuario).then(function(f){
+                $scope.respuesta = f.photos;
+                
+                angular.forEach($scope.respuesta.photo, function(nuevoUrl) {
+                    nuevoUrl.urlacceso = "#/foto/" + nuevoUrl.idfoto;
+                });    
+                
+                $scope.peticion = $scope.respuesta;
+            });
+    });
 
 	app.controller('AlbumPhotosCtrl', function($scope, $routeParams, AlbumService) {
 			$scope.iden = $routeParams.idalbum;
@@ -147,11 +206,11 @@
                 $scope.peticion = $scope.respuesta;
             });
 	});
-        
+
+
+    // AREA DE TESTING!!!
     app.controller('TestCtrl', function($scope, TestService) {
         TestService.getHola().then(function(f){ $scope.mensaje = f; });
-        //TestService.getAlbum().then(function(f){ $scope.album = f; });
-        //PhotoService.getTest().then(function(f){ $scope.albums = f; });
 
         $scope.localQuery = function(query) {
         	TestService.getLocalQuery(query).then(function(f){ $scope.respuestaLocal = f; });	
@@ -160,5 +219,20 @@
         $scope.remoteQuery = function(query) {
         	TestService.getRemoteQuery(query).then(function(f){ $scope.respuestaRemota = f; });
         }
+    });
+
+    app.controller('ProfileCtrl', function($scope, $routeParams, UserDataFactory) {
+        UserDataFactory.getUser().then(function(f){
+            $scope.nombre = f.nombre;
+            $scope.apellido = f.apellido;
+            $scope.apodo = f.apodo;
+            $scope.descripcion = f.descripcion;
+            $scope.imgavatar = f.urlfoto;
+            $scope.imgcover = f.urlperfil;
+
+            if ($scope.imgcover || $scope.imgcover==="") {
+                $scope.imgcover = "images/users/wall/user002.jpg";
+            }
+        });
     });
 })();

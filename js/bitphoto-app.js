@@ -16,9 +16,9 @@
 
             when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
             when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'CameraRollCtrl'}).
-            when('/albumes', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
+            //when('/albumes', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
             when('/mapa', {templateUrl: 'views/map.html',   controller: 'MapCtrl'}).
-            when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
+            //when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
             when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'RecentCtrl'}).
 
             when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
@@ -32,6 +32,11 @@
 
             when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
+            when('/perfil/:idusuario', {templateUrl: 'views/view-user.html',   controller: 'OtherUserCtrl'}).
+
+            when('/fotos/:id?', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
+            when('/albumes/:id?', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
+            when('/favoritas/:id?', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
             
             when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'TestCtrl'}).
             when('/testalbum', {templateUrl: 'views/view-album.html',   controller: 'TestCtrl'}).

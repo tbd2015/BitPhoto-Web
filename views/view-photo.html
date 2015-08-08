@@ -4,14 +4,14 @@
     <div id="bp-content" class="container">
     	<div class="row">
             <h1>{{tituloImagen}} <small>por {{autorImagen}}</small></h1>
-    	    <div class="col-md-8">
+    	    <div class="col-md-8 col-sm-9 col-xs-12">
                     <img src={{urlImagen}} class="fotografia">
                     <br/>
                     {{descripcionImagen}}
                     <br/>
                     <br/>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-3 col-xs-12">
                     <h2>Datos de la fotografía</h2>
                     {{visitasImagen}} visitas<br/>
                     {{favoritosImagen}} favoritos<br/>
@@ -27,6 +27,34 @@
                     Modelo Cámara: {{modeloCamara}}<br/>
                     Resolución: {{resCamara}} MPX<br/>
                     Zoom: {{zoomCamara}}<br/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="panel panel-white post panel-shadow">
+                    <div class="post-footer">
+                        <div class="input-group"> 
+                            <input class="form-control" placeholder="Agrega un comentario..." type="text">
+                            <span class="input-group-addon">
+                                <a href="#"><i class="fa fa-edit"></i></a>  
+                            </span>
+                        </div>
+                        <ul class="comments-list">
+                            <li class="comment" ng-repeat="comentario in comentarios track by comentario.IdComentarioFoto">
+                                <a class="pull-left" href="#">
+                                    <img class="avatar" src="{{comentario.avatar}}" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">{{comentario.usuario}}</h4>
+                                        <h5 class="time">{{comentario.fecha_creacion}}</h5>
+                                    </div>
+                                    <p>{{comentario.comentario}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

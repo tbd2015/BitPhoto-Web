@@ -77,15 +77,39 @@
 			});
 		};
 
-		this.getPhotostream = function() {
+		this.getPhotoComments = function(id) {
 			var email = GetterService.getEmail();
-			var path = parms.serverPath + "/photoStream/" + email;
+			var path = parms.serverPath + "/photo/" + email + "/comentario/" + id;
 			var p0 = $http.get(path);
 
 			return $q.all([p0]).then(function(res) {
 				var retorno = res[0].data;
 				return retorno;
 			});
+		};
+
+		this.getPhotostream = function(id) {
+			if (!id) {
+				email = GetterService.getEmail();
+				path = parms.serverPath + "/photoStream/" + email;
+				p0 = $http.get(path);
+
+				return $q.all([p0]).then(function(res) {
+					var retorno = res[0].data;
+					return retorno;
+				});
+			}
+			else {
+				path1 = parms.serverPath + "/user/id/" + id;
+				
+				return $http.get(path1).then(function(r1) {
+					path2 = parms.serverPath + "/photoStream/" + r1.data.correo;
+
+					return $http.get(path2).then(function(r2) {
+						return r2.data;
+					});
+				});
+			}
 		};
 
 		this.getHomePhotos = function(num) {
@@ -138,6 +162,17 @@
 					return "";
 				});
 			},
+			id2user: function(id) {
+				var path = parms.serverPath + "/user/id/" + id;
+				var promise = $http.get(path);
+
+				return promise.then(function(ret) {
+					return ret.data;
+				}, function (error) {
+					console.log(error);
+					return "";
+				});
+			},
 			id2username: function(id) {
 				var path = parms.serverPath + "/user/id/" + id;
 				var promise = $http.get(path);
@@ -150,6 +185,14 @@
 					console.log(error);
 					return "";
 				});
+			},
+			getUserProfile: function(id) {
+				if (!id) {
+					return this.getUser();
+				}
+				else {
+					return this.id2user(id);
+				}
 			}
 		};
 	});
