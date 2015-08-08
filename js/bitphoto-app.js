@@ -32,8 +32,8 @@
 
             when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
-            when('/perfil/:idusuario', {templateUrl: 'views/view-user.html',   controller: 'OtherUserCtrl'}).
 
+            when('/perfil/:id?', {templateUrl: 'views/profile.html',   controller: 'ProfileCtrl'}).
             when('/fotos/:id?', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
             when('/albumes/:id?', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
             when('/favoritas/:id?', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).

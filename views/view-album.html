@@ -4,7 +4,9 @@
     <div id="bp-content" class="container">
     	<div class="row">
             <h1>{{titulo}} <small>{{descripcion}}</small></h1>
+            Creado por <a href="{{urlUsuario}}">{{username}}</a>
         </div>
+        <br/>
         <div class="row">
             <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" ng-repeat="foto in peticion.fotos track by foto.idfoto">
                 <a href="{{foto.urlacceso}}">

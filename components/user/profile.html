@@ -1,0 +1,29 @@
+<div class="container">
+    <!--<div class="row no-margin">-->
+    <div class="row">
+        <ul class="nav nav-tabs margin">
+            <li role="presentation" class="active">
+                <a href="#/perfil/{{idpeticion}}"><i class="fa fa-user fa-md"></i> Perfil de Usuario</a>
+            </li>
+            <li role="presentation">
+                <a href="#/fotos/{{idpeticion}}"><i class="fa fa-picture-o fa-md"></i> Photostream</a>
+            </li>
+            <li role="presentation">
+                <a href="#/albumes/{{idpeticion}}"><i class="fa fa-folder-open-o fa-md"></i> Álbumes</a>
+            </li>
+            <li role="presentation">
+                <a href="#/favoritas/{{idpeticion}}"><i class="fa fa-heart-o fa-md"></i> Favoritas</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <h1>Datos del Usuario <small>{{username}}</small></h1>
+        <b>Inscrito en BitPhoto desde</b> {{fechaCreacion}}<br/>
+        <b>Fotografías subidas:</b> {{cantFotos}}<br/>
+        <b>Álbumes creados:</b> {{cantAlbumes}}<br/>
+        <b>Usuarios que lo siguen:</b> {{cantSeguidores}}<br/>
+        <b>Usuarios a los que sigue:</b> {{cantSeguidos}}<br/>
+        <br/>
+    </div>
+</div>

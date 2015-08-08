@@ -3,7 +3,7 @@
 <main class="sitio-contenido">
     <div id="bp-content" class="container">
     	<div class="row">
-            <h1>{{tituloImagen}} <small>por {{autorImagen}}</small></h1>
+            <h1>{{tituloImagen}} <small>por <a href="{{urlUsuario}}">{{autorImagen}}</a></small></h1>
     	    <div class="col-md-8 col-sm-9 col-xs-12">
                     <img src={{urlImagen}} class="fotografia">
                     <br/>
@@ -46,7 +46,7 @@
                                 </a>
                                 <div class="comment-body">
                                     <div class="comment-heading">
-                                        <h4 class="user">{{comentario.usuario}}</h4>
+                                        <h4 class="user"><a href="{{comentario.urlUsuario}}">{{comentario.usuario}}</a></h4>
                                         <h5 class="time">{{comentario.fecha_creacion}}</h5>
                                     </div>
                                     <p>{{comentario.comentario}}</p>

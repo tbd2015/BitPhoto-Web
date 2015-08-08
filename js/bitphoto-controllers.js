@@ -53,6 +53,7 @@
             $scope.descripcion = f.descripcion;
             $scope.imgavatar = f.urlfoto;
             $scope.imgcover = f.urlperfil;
+            $scope.username = f.nombre + " " + f.apellido + " (" + f.alias + ")";
 
             if (!($scope.imgcover) || $scope.imgcover==="") {
                 $scope.imgcover = "images/users/wall/user002.jpg";
@@ -84,6 +85,7 @@
             PhotoService.getPhoto($routeParams.idfoto).then(function(f){
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
+                $scope.urlUsuario = "#/fotos/" + f.IdUsuario;
 
                 $scope.fechaTomadaImagen = f.fecha_toma;
                 $scope.fechaSubidaImagen = f.fecha_carga;
@@ -111,10 +113,58 @@
                     UserDataFactory.id2user(comm.IdUsuario).then(function(g) {
                         comm.usuario = g.nombre + " " + g.apellido + " (" + g.alias + ")";
                         comm.avatar = g.urlfoto;
+                        comm.urlUsuario = "#/fotos/" + comm.IdUsuario;
                     });                    
                 });
             });                
 	});
+
+    app.controller('ProfileCtrl', function($scope, $routeParams, UserDataFactory) {
+        if ($routeParams.id) {
+            $scope.idpeticion = $routeParams.id;
+
+            UserDataFactory.id2user($routeParams.id).then(function(f){
+                $scope.nombre = f.nombre;
+                $scope.apellido = f.apellido;
+                $scope.apodo = f.alias;
+                $scope.descripcion = f.descripcion;
+                $scope.imgavatar = f.urlfoto;
+                $scope.imgcover = f.urlperfil;
+                $scope.cantFotos = f.cantidad_fotos;
+                $scope.cantAlbumes = f.cantidad_albumes;
+                $scope.cantSeguidores = f.cantidad_seguidores;
+                $scope.cantSeguidos = f.cantidad_seguidos;
+                $scope.fechaCreacion = f.fecha_creacion;
+                $scope.username = f.nombre + " " + f.apellido + " (" + f.alias + ")";
+
+                if (!($scope.imgcover) || $scope.imgcover==="") {
+                    $scope.imgcover = "images/users/wall/user002.jpg";
+                }
+            });
+        }
+        else {
+            $scope.idpeticion = "";
+
+            UserDataFactory.getUser().then(function(f){
+                $scope.nombre = f.nombre;
+                $scope.apellido = f.apellido;
+                $scope.apodo = f.alias;
+                $scope.descripcion = f.descripcion;
+                $scope.imgavatar = f.urlfoto;
+                $scope.imgcover = f.urlperfil;
+                $scope.cantFotos = f.cantidad_fotos;
+                $scope.cantAlbumes = f.cantidad_albumes;
+                $scope.cantSeguidores = f.cantidad_seguidores;
+                $scope.cantSeguidos = f.cantidad_seguidos;
+                $scope.fechaCreacion = f.fecha_creacion;
+                $scope.username = f.nombre + " " + f.apellido + " (" + f.alias + ")";
+
+                if (!($scope.imgcover) || $scope.imgcover==="") {
+                    $scope.imgcover = "images/users/wall/user002.jpg";
+                }
+            });
+        }
+    });
         
     app.controller('PhotostreamCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
             if ($routeParams.id) {
@@ -197,6 +247,8 @@
             AlbumService.getAlbumPhotos($routeParams.idalbum).then(function(f){
             	$scope.titulo = f.album.nombre_album;
             	$scope.descripcion = f.album.descripcion;
+                $scope.username = f.usuario.nombre_real + " " + f.usuario.apellido + " (" + f.usuario.alias + ")";
+                $scope.urlUsuario = "#/fotos/" + f.usuario.idusuario;
                 $scope.respuesta = f.album;
                 
                 angular.forEach($scope.respuesta.fotos, function(nuevoUrl) {
@@ -219,20 +271,5 @@
         $scope.remoteQuery = function(query) {
         	TestService.getRemoteQuery(query).then(function(f){ $scope.respuestaRemota = f; });
         }
-    });
-
-    app.controller('ProfileCtrl', function($scope, $routeParams, UserDataFactory) {
-        UserDataFactory.getUser().then(function(f){
-            $scope.nombre = f.nombre;
-            $scope.apellido = f.apellido;
-            $scope.apodo = f.apodo;
-            $scope.descripcion = f.descripcion;
-            $scope.imgavatar = f.urlfoto;
-            $scope.imgcover = f.urlperfil;
-
-            if ($scope.imgcover || $scope.imgcover==="") {
-                $scope.imgcover = "images/users/wall/user002.jpg";
-            }
-        });
     });
 })();
