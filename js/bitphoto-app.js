@@ -21,8 +21,8 @@
             //when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
             when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'RecentCtrl'}).
 
-            when('/fotos-de', {templateUrl: 'views/photos-from.html',   controller: 'HomeCtrl'}).
-            when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'HomeCtrl'}).
+            when('/fotos-de/:num?', {templateUrl: 'views/photos-from.html',   controller: 'PhotosFromCtrl'}).
+            when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'PhotosOfCtrl'}).
 
             when('/recientes', {templateUrl: 'views/recentphotos.html',   controller: 'HomeCtrl'}).
             when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).

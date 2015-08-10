@@ -125,15 +125,28 @@
 	});
 
 	app.service('AlbumService', function($http, $q, parms, GetterService) {
-		this.getAlbums = function() {
-			var email = GetterService.getEmail();
-			var path = parms.serverPath + "/albumes/" + email;
-			var p0 = $http.get(path);
+		this.getAlbums = function(id) {
+			if (!id) {
+				email = GetterService.getEmail();
+				path = parms.serverPath + "/albumes/" + email;
+				p0 = $http.get(path);
 
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
+				return $q.all([p0]).then(function(res) {
+					var retorno = res[0].data;
+					return retorno;
+				});
+			}
+			else {
+				path1 = parms.serverPath + "/user/id/" + id;
+				
+				return $http.get(path1).then(function(r1) {
+					path2 = parms.serverPath + "/albumes/" + r1.data.correo;
+
+					return $http.get(path2).then(function(r2) {
+						return r2.data;
+					});
+				});
+			}
 		};
 
 		this.getAlbumPhotos = function(id) {
