@@ -228,6 +228,10 @@
                     $scope.imgcover = "images/users/wall/user002.jpg";
                 }
             });
+
+            $scope.recargar = function(cant) {
+                $location.path("/fotos-de/" + cant);
+            }
 	});
 
     app.controller('FavoritesCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
@@ -279,6 +283,31 @@
             });
 	});
 
+    app.controller('PhotosFromCtrl', function($scope, $routeParams, PhotoService) {
+            if ($routeParams.cant) {
+                $scope.cant = $routeParams.cant;
+            }
+            else {
+                $scope.cant = 5;
+            }
+
+            PhotoService.getPhotosFrom($scope.cant).then(function(f) {
+                $scope.respuesta = f.usuarios;
+                $scope.peticion = [];
+                
+                angular.forEach($scope.respuesta.usuariosfollows, function(user) {
+                    angular.forEach(user.photos, function(foto) {
+                        foto.urlacceso = "#/foto/" + foto.IdFoto;
+                        $scope.peticion.push(foto);
+                    });
+                });
+                
+                //$scope.peticion = $scope.respuesta;
+                //console.log($scope.peticion);
+            });
+
+
+    });
 
     // AREA DE TESTING!!!
     app.controller('TestCtrl', function($scope, TestService) {

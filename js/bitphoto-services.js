@@ -146,6 +146,17 @@
 				return retorno;
 			});
 		};
+
+		this.getPhotosFrom = function(cant) {
+			var email = GetterService.getEmail();
+			var path = parms.serverPath + "/photosfrom/" + cant + "/" + email;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
 	});
 
 	app.service('AlbumService', function($http, $q, parms, GetterService) {

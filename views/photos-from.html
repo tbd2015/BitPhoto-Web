@@ -15,13 +15,13 @@
                         <a href="#/fotos-con">Fotos con</a>
                     </li>
                     <li class="pull-right">
-                        <form class="form-inline">
+                        <form novalidate class="form-inline">
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>5 por persona</option>
-                                    <option>1 por persona</option>
+                                <select class="form-control" title="Cantidad de Imágenes" ng-model="cant">
+                                    <option value="5">5 por persona</option>
+                                    <option value="1">1 por persona</option>
                                 </select>
-                                <button type="submit">Recargar</button>
+                                <input type="submit" ng-click="recargar(cant)" value="asdf"></input>
                             </div>
                         </form>
                     </li>
@@ -29,12 +29,12 @@
             </div>
             <div class="row">
                 <div class="row">
-                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" ng-repeat="foto in peticion.photo track by foto.idfoto">
+                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" ng-repeat="foto in peticion track by foto.IdFoto">
                         <a href="{{foto.urlacceso}}">
-                            <img class="thumbnail center-div img-responsive" src="{{foto.urlserver}}" alt="{{foto.titulo}}">
+                            <img class="thumbnail center-div img-responsive" src="{{foto.Url}}" alt="{{foto.Titulo}}">
                         </a>
                         <span class="pull-left">{{foto.titulo}}</span>
-                        <span class="pull-right"><i class="fa fa-eye"></i> {{foto.views}} · <i class="fa fa-thumbs-o-up"></i> {{foto.favoritos}} · <i class="fa fa-comment-o"></i> {{foto.comentarios}}</span>
+                        <span class="pull-right"><i class="fa fa-eye"></i> {{foto.Vistas}} · <i class="fa fa-thumbs-o-up"></i> {{foto.Cantidad_favoritos}} · <i class="fa fa-comment-o"></i> {{foto.Cantidad_comentarios}}</span>
                     </div>
                 </div>
             </div>
