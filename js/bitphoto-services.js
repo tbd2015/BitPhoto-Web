@@ -112,6 +112,30 @@
 			}
 		};
 
+		this.getFavorites = function(id) {
+			if (!id) {
+				email = GetterService.getEmail();
+				path = parms.serverPath + "/photo/" + email + "/favoritos";
+				p0 = $http.get(path);
+
+				return $q.all([p0]).then(function(res) {
+					var retorno = res[0].data;
+					return retorno;
+				});
+			}
+			else {
+				path1 = parms.serverPath + "/user/id/" + id;
+				
+				return $http.get(path1).then(function(r1) {
+					path2 = parms.serverPath + "/photo/" + r1.data.correo + "/favoritos";
+
+					return $http.get(path2).then(function(r2) {
+						return r2.data;
+					});
+				});
+			}
+		};
+
 		this.getHomePhotos = function(num) {
 			var email = GetterService.getEmail();
 			var path = parms.serverPath + "/photo/" + email + "/" + num;
