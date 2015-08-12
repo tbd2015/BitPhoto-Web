@@ -228,10 +228,6 @@
                     $scope.imgcover = "images/users/wall/user002.jpg";
                 }
             });
-
-            $scope.recargar = function(cant) {
-                $location.path("/fotos-de/" + cant);
-            }
 	});
 
     app.controller('FavoritesCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
@@ -283,7 +279,7 @@
             });
 	});
 
-    app.controller('PhotosFromCtrl', function($scope, $routeParams, PhotoService) {
+    app.controller('PhotosFromCtrl', function($scope, $routeParams, $location, PhotoService) {
             if ($routeParams.cant) {
                 $scope.cant = $routeParams.cant;
             }
@@ -301,12 +297,11 @@
                         $scope.peticion.push(foto);
                     });
                 });
-                
-                //$scope.peticion = $scope.respuesta;
-                //console.log($scope.peticion);
             });
 
-
+            $scope.recargar = function(cant) {
+                $location.path("/fotos-de/" + cant);
+            }
     });
 
     // AREA DE TESTING!!!
