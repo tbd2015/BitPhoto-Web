@@ -13,48 +13,6 @@
 		};
 	});
 
-	app.service('TestService', function($http, $q, parms) {            
-		this.getHola = function() {
-			var path = parms.serverPath + "/helloworld";
-			var p0 = $http.get(path);
-
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
-		};
-
-		this.getAlbum = function() {
-			var path = parms.serverPath + "/albumes";
-			var p0 = $http.get(path);
-
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
-		};
-
-		this.getLocalQuery = function(query) {
-			var path = parms.localServerPath + "/" + query;
-			var p0 = $http.get(path);
-
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
-		};
-
-		this.getRemoteQuery = function(query) {
-			var path = parms.remoteServerPath + "/" + query;
-			var p0 = $http.get(path);
-
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
-		};
-	});
-
 	app.service('PhotoService', function($http, $q, parms, GetterService) {            
 		this.getTest = function() {
 			var path = parms.serverPath + "/albumes";
@@ -196,6 +154,18 @@
 		};
 	});
 
+	app.service('TagService', function($http, $q, parms) {
+		this.getPhotoTags = function(id) {
+			var path = parms.serverPath + "/tags/" + id;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+	});
+
 	app.factory('UserDataFactory', function($http, parms, GetterService) {
 		return {
 			getUser: function() {
@@ -245,11 +215,54 @@
 		};
 	});
 
+	/* ÁREA DE TESTING */
 	app.factory('CameraDataFactory', function($http, parms, GetterService) {
 		return {
 			getCamera: function(id) {
 				return null;
 			}
+		};
+	});
+
+	app.service('TestService', function($http, $q, parms) {            
+		this.getHola = function() {
+			var path = parms.serverPath + "/helloworld";
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+
+		this.getAlbum = function() {
+			var path = parms.serverPath + "/albumes";
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+
+		this.getLocalQuery = function(query) {
+			var path = parms.localServerPath + "/" + query;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+
+		this.getRemoteQuery = function(query) {
+			var path = parms.remoteServerPath + "/" + query;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
 		};
 	});
 })();

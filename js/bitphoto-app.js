@@ -32,24 +32,17 @@
 
             when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
+            when('/tag/:etiqueta?', {templateUrl: 'views/view-tags.html',   controller: 'TagCtrl'}).
 
             when('/perfil/:id?', {templateUrl: 'views/profile.html',   controller: 'ProfileCtrl'}).
             when('/fotos/:id?', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
             when('/albumes/:id?', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
             when('/favoritas/:id?', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
-            
-            when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'TestCtrl'}).
+
+            when('/testhola', {templateUrl: 'views/holamundo.html',   controller: 'HolaCtrl'}).
             when('/testalbum', {templateUrl: 'views/view-album.html',   controller: 'TestCtrl'}).
             when('/query', {templateUrl: 'views/query.html',   controller: 'TestCtrl'}).
 
-            /*
-            when('/demo', {templateUrl: 'demo.html',   controller: 'DemoCtrl'}).
-            when('/demo1', {templateUrl: 'demo1.html',   controller: 'MapaCtrl'}).
-            when('/demo2', {templateUrl: 'demo2.html',   controller: 'FormCtrl'}).
-            when('/demo2a/:marca', {templateUrl: 'demo2a.html',   controller: 'JsonCtrl'}).
-            when('/demo2b/:marca', {templateUrl: 'demo2b.html',   controller: 'JsonCtrl'}).
-            */
-			
             otherwise({redirectTo: '/'});
     }]);
 

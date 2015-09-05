@@ -81,7 +81,7 @@
             $scope.variable = "";
 	});
 
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, UserDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f){
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
@@ -116,7 +116,20 @@
                         comm.urlUsuario = "#/fotos/" + comm.IdUsuario;
                     });                    
                 });
-            });                
+            });
+
+            TagService.getPhotoTags($routeParams.idfoto).then(function(f) {
+                if (f.length <= 0) {
+                    $scope.etiquetas = ""
+                }
+                else {
+                    $scope.etiquetas = f;
+
+                    angular.forEach($scope.etiquetas, function(tags) {
+                        tags.UrlTag = "#/tags/" + tags.NombreTag;
+                    });   
+                }
+            });
 	});
 
     app.controller('ProfileCtrl', function($scope, $routeParams, UserDataFactory) {
@@ -305,9 +318,11 @@
     });
 
     // AREA DE TESTING!!!
-    app.controller('TestCtrl', function($scope, TestService) {
+    app.controller('HolaCtrl', function($scope, TestService) {
         TestService.getHola().then(function(f){ $scope.mensaje = f; });
+    });
 
+    app.controller('TestCtrl', function($scope, TestService) {
         $scope.localQuery = function(query) {
         	TestService.getLocalQuery(query).then(function(f){ $scope.respuestaLocal = f; });	
         }

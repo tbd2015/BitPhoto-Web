@@ -95,3 +95,7 @@ input.ng-valid {
 input.ng-pristine {
   border: 1px solid gray;
 }
+
+.mismalinea {
+    display: inline;
+}

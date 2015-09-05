@@ -5,11 +5,19 @@
     	<div class="row">
             <h1>{{tituloImagen}} <small>por <a href="{{urlUsuario}}">{{autorImagen}}</a></small></h1>
     	    <div class="col-md-8 col-sm-9 col-xs-12">
-                    <img src={{urlImagen}} class="fotografia">
-                    <br/>
+                <img src={{urlImagen}} class="fotografia">
+                </br>
+                <div>
                     {{descripcionImagen}}
-                    <br/>
-                    <br/>
+                </div>
+                </br>
+                <div>
+                    <h3 class="mismalinea">Tags</h3>
+                    <span clase="mismalinea" ng-repeat="tag in etiquetas track by tag.IdTag">
+                        <a href="{{tag.UrlTag}}"><i class="fa fa-tag">{{tag.NombreTag}}</i></a> 
+                    </span>
+                </div>
+                </br></br>
             </div>
             <div class="col-md-4 col-sm-3 col-xs-12">
                     <h2>Datos de la fotografía</h2>
@@ -19,9 +27,7 @@
                     Tomada el {{fechaTomadaImagen}}<br/>
                     Subida el {{fechaSubidaImagen}}<br/>
                     Permisos: {{permisosImagen}}<br/>
-
                     <hr/>
-
                     <h2>Datos EXIF</h2>
                     Marca Cámara: {{marcaCamara}}<br/>
                     Modelo Cámara: {{modeloCamara}}<br/>
