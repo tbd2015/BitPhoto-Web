@@ -81,8 +81,8 @@
             $scope.variable = "";
 	});
 
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, UserDataFactory) {
-            PhotoService.getPhoto($routeParams.idfoto).then(function(f){
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, UserDataFactory, CameraDataFactory) {
+            PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
                 $scope.urlUsuario = "#/fotos/" + f.IdUsuario;
@@ -96,14 +96,15 @@
                 $scope.comentariosImagen = f.Cantidad_comentarios;
                 $scope.permisosImagen = "";
 
-                $scope.marcaCamara = "";
-                $scope.nombreCamara = "";
-                $scope.resCamara = "";
-                $scope.zoomCamara = "";
-
                 UserDataFactory.id2username(f.IdUsuario).then(function(g) {
                     $scope.autorImagen = g;
                 });
+            });
+
+            CameraDataFactory.getPhotoCamera($routeParams.idfoto).then(function(f) {
+                $scope.modeloCamara = f.Camara.nombre;
+                $scope.resCamara = f.Camara.megapixeles;
+                $scope.zoomCamara = f.Camara.zoom;
             });
 
             PhotoService.getPhotoComments($routeParams.idfoto).then(function(f) {

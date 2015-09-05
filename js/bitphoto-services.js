@@ -220,7 +220,18 @@
 		return {
 			getCamera: function(id) {
 				return null;
-			}
+			},
+			getPhotoCamera: function(id) {
+				var path = parms.serverPath + "/camara/" + id;
+				var promise = $http.get(path);
+
+				return promise.then(function(ret) {
+					return ret.data;
+				}, function (error) {
+					console.log(error);
+					return "";
+				});
+			}			
 		};
 	});
 
