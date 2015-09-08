@@ -160,6 +160,12 @@ body {
     border:1px solid #94a0b4;
     color:#000
 }
+.portfolio-home {
+    margin-bottom: 15px;
+}
+.portfolio-title {
+    max-width: 650px;
+}
 .portfolio-item {
     height: 300px;
     margin-bottom: 15px;
