@@ -1,50 +1,7 @@
 (function(){
 	var app = angular.module('bitphoto-controllers', []);
 
-	var JsonServer = "http://localhost:4000";
-
-	app.controller('SessionCtrl', function($scope, $location, AuthenticationService) {
-	    $scope.formLogin = {};
-	    $scope.formRegister = {};
-	    $scope.registerStatus = "";
-
-		$scope.submitLogin = function (formLogin) {
-			if ($scope.loginForm.$valid) {
-				loginData = JSON.stringify(formLogin);
-				console.log("Se procede a Iniciar Sesión con" + loginData);
-				// TODO ruta logeado
-				$location.path("/portada");
-			}
-			else {
-				console.log("¡Formulario de Login Inválido!");
-			}
-		};
-
-		$scope.submitRegister = function (formRegister) {
-			if ($scope.registerForm.$valid) {
-				if (formRegister.password1===formRegister.password2) {
-					registerData = JSON.stringify(formRegister);
-					console.log("Se procede a hacer Registro con" + registerData);
-					// TODO ruta registrado
-					$scope.registerStatus = "¡Formulario de Registro Válido!";
-					$location.path("/portada");
-				}
-				else {
-					$scope.registerStatus = "Las contraseñas no son iguales";
-				}
-			}
-			else {
-				console.log("¡Formulario de Registro Inválido!");
-				$scope.registerStatus = "¡Formulario de Registro Inválido!";
-			}
-		};
-
-		$scope.logout = function () {
-			AuthenticationService.ClearCredentials();
-			$location.path("/");
-		}
-	});
-
+	// CONTROLADOR Muestra datos del usuario
 	app.controller('UserCtrl', function($scope, UserDataFactory) {
         UserDataFactory.getUser().then(function(f){
             $scope.nombre = f.nombre;
@@ -61,10 +18,12 @@
         });
 	});
 
+    // CONTROLADOR Elemento vacío
 	app.controller('IndexCtrl', function($scope) {
         $scope.variable = "";
 	});
 
+    // CONTROLADOR Muestra las fotos de portada
 	app.controller('HomeCtrl', function($scope, parms, PhotoService) {
         PhotoService.getHomePhotos(parms.fotosPortada).then(function(f){
             $scope.respuesta = f.photos;
@@ -77,10 +36,12 @@
         });
 	});
 
+    // CONTROLADOR Manejador de Subida de Fotos
 	app.controller('UploadCtrl', function($scope) {
-            $scope.variable = "";
+        $scope.variable = "";
 	});
 
+    // CONTROLADOR Muestra la vista de los datos de una fotografía
 	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, UserDataFactory, CameraDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
@@ -133,6 +94,7 @@
             });
 	});
 
+    // CONTROLADOR Muestra los datos completos de un usuario
     app.controller('ProfileCtrl', function($scope, $routeParams, UserDataFactory) {
         if ($routeParams.id) {
             $scope.idpeticion = $routeParams.id;
@@ -179,7 +141,8 @@
             });
         }
     });
-        
+    
+    // CONTROLADOR Muestra el Photostream del usuario
     app.controller('PhotostreamCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
             if ($routeParams.id) {
                 $scope.idpeticion = $routeParams.id;    
@@ -211,7 +174,8 @@
                 }
             });
 	});
-
+    
+    // CONTROLADOR Muestra los álbumes del usuario
 	app.controller('AlbumCtrl', function($scope, $routeParams, AlbumService, UserDataFactory) {
             if ($routeParams.id) {
                 $scope.idpeticion = $routeParams.id;    
@@ -243,8 +207,9 @@
                 }
             });
 	});
-
-    app.controller('FavoritesCtrl', function($scope, $routeParams, PhotoService, UserDataFactory) {
+    
+    // CONTROLADOR Muestra las fotos favoritas de un usuario
+    app.controller('FavoritesCtrl', function($scope, $routeParams, FavoritesService, UserDataFactory) {
             if ($routeParams.id) {
                 $scope.idpeticion = $routeParams.id;    
             }
@@ -275,7 +240,8 @@
                 }
             });
     });
-
+    
+    // CONTROLADOR Muestra las fotos pertenencientes a un album
     app.controller('AlbumPhotosCtrl', function($scope, $routeParams, AlbumService) {
 			$scope.iden = $routeParams.idalbum;
             AlbumService.getAlbumPhotos($routeParams.idalbum).then(function(f){
@@ -293,6 +259,7 @@
             });
 	});
 
+    // CONTROLADOR "Fotos de"
     app.controller('PhotosFromCtrl', function($scope, $routeParams, $location, PhotoService) {
             if ($routeParams.cant) {
                 $scope.cant = $routeParams.cant;
@@ -318,6 +285,7 @@
             }
     });
 
+    // CONTROLADOR "Fotos con"
     app.controller('PhotosOfCtrl', function($scope, $routeParams, $location, PhotoService) {
             if ($routeParams.cant) {
                 $scope.cant = $routeParams.cant;
@@ -343,11 +311,14 @@
             }
     });
 
-    // AREA DE TESTING!!!
+    /* AREA DE TESTING */
+
+    // CONTROLADOR "Hola Mundo!"
     app.controller('HolaCtrl', function($scope, TestService) {
         TestService.getHola().then(function(f){ $scope.mensaje = f; });
     });
 
+    // CONTROLADOR Testing de consultas GET
     app.controller('TestCtrl', function($scope, TestService) {
         $scope.localQuery = function(query) {
         	TestService.getLocalQuery(query).then(function(f){ $scope.respuestaLocal = f; });	

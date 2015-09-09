@@ -1,6 +1,7 @@
 (function(){
     var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
     
+    // Parámetros globales del sistema
     app.value('parms', {
         localServerPath: "http://localhost:8080/BitPhoto",
         remoteServerPath: "http://bitphoto-tbd2015.rhcloud.com/bitphoto",
@@ -8,6 +9,7 @@
         fotosPortada: 15
     });
 
+    // Configuración de rutas de AngularJS y sus respectivos Controladores
     app.config(['$routeProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
             when('/', {templateUrl: 'views/indexguest.html',   controller: 'IndexCtrl'}).
@@ -16,9 +18,7 @@
 
             when('/photostream', {templateUrl: 'views/photostream.html',   controller: 'PhotostreamCtrl'}).
             when('/cameraroll', {templateUrl: 'views/cameraroll.html',   controller: 'CameraRollCtrl'}).
-            //when('/albumes', {templateUrl: 'views/albums.html',   controller: 'AlbumCtrl'}).
             when('/mapa', {templateUrl: 'views/map.html',   controller: 'MapCtrl'}).
-            //when('/favoritas', {templateUrl: 'views/favorites.html',   controller: 'FavoritesCtrl'}).
             when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'RecentCtrl'}).
 
             when('/fotos-de/:cant?', {templateUrl: 'views/photos-from.html',   controller: 'PhotosFromCtrl'}).
@@ -45,7 +45,8 @@
 
             otherwise({redirectTo: '/'});
     }]);
-
+    
+    // Código de autentificación de login y cookies
     app.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
        	// keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -64,6 +65,7 @@
         });
     }]);
 
+    // DIRECTIVA Permite redirigir al usuario a las vistas indicadas por las rutas
     app.directive('loadComponent', function() {
         return {
             templateUrl: function(elem, attr){
