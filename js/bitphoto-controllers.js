@@ -1,6 +1,14 @@
 (function(){
 	var app = angular.module('bitphoto-controllers', []);
 
+    // CONTROLADOR Manejador de Sesiones
+    app.controller('SessionCtrl', function($scope, $location, AuthenticationService) {
+        $scope.logout = function () {
+            AuthenticationService.ClearCredentials();
+            $location.path("/");
+        }
+    });
+
 	// CONTROLADOR Muestra datos del usuario
 	app.controller('UserCtrl', function($scope, UserDataFactory) {
         UserDataFactory.getUser().then(function(f){
@@ -42,7 +50,7 @@
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, UserDataFactory, CameraDataFactory) {
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, UserDataFactory, CameraDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
@@ -55,6 +63,7 @@
                 $scope.visitasImagen = f.Vistas;
                 $scope.favoritosImagen = f.Cantidad_favoritos;
                 $scope.comentariosImagen = f.Cantidad_comentarios;
+                $scope.alias = "";
                 $scope.permisosImagen = "";
 
                 UserDataFactory.id2username(f.IdUsuario).then(function(g) {
@@ -73,6 +82,7 @@
 
                 angular.forEach($scope.comentarios, function(comm) {
                     UserDataFactory.id2user(comm.IdUsuario).then(function(g) {
+                        $scope.alias = g.alias;
                         comm.usuario = g.nombre + " " + g.apellido + " (" + g.alias + ")";
                         comm.avatar = g.urlfoto;
                         comm.urlUsuario = "#/fotos/" + comm.IdUsuario;
@@ -92,6 +102,18 @@
                     });   
                 }
             });
+
+            $scope.favoritear = function() {
+                var solicitud = "FavoritosFoto: { Foto: {'idfoto': '"+ $routeParams.idfoto +"'}, Usuario: {'aleas': '"+ $scope.alias +"'} }"
+                FavoritesService.setPhotoAsFavorite(solicitud).then(function(f) {
+                    if (f.success==="true") {
+                        $scope.estado = "¡Foto agregada a Favoritos!";
+                    }
+                    else {
+                        $scope.estado = "ERROR al agregar foto a favoritos";
+                    }
+                });
+            }
 	});
 
     // CONTROLADOR Muestra los datos completos de un usuario
@@ -209,7 +231,7 @@
 	});
     
     // CONTROLADOR Muestra las fotos favoritas de un usuario
-    app.controller('FavoritesCtrl', function($scope, $routeParams, FavoritesService, UserDataFactory) {
+    app.controller('FavoritesCtrl', function($scope, $routeParams, PhotoService, FavoritesService, UserDataFactory) {
             if ($routeParams.id) {
                 $scope.idpeticion = $routeParams.id;    
             }
@@ -217,7 +239,7 @@
                 $scope.idpeticion = "";
             }
 
-            PhotoService.getFavorites($routeParams.id).then(function(f) {
+            FavoritesService.getFavorites($routeParams.id).then(function(f) {
                 $scope.respuesta = f.photosfav;
                 
                 angular.forEach($scope.respuesta.photo, function(nuevoUrl) {

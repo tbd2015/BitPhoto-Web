@@ -196,12 +196,17 @@
 			}
 		};
 
-		// POST Setear foto <id> como favorita
-		this.setPhotoAsFavorite = function(id) {
+		// POST Setear foto como favorita
+		this.setPhotoAsFavorite = function(query) {
 			email = GetterService.getEmail();
 			path = parms.serverPath + "/photo/" + email + "/favoritofoto";
-			//p0 = $http.post(path);
-			// TODO terminar función
+			p0 = $http.post(path, query);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				console.log(retorno);
+				return retorno;
+			});
 		};
 	});
 
