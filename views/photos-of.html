@@ -16,7 +16,17 @@
                     </li>
                 </ul>
             </div>
-            <div load-component route="components/genericgallery.html"></div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" ng-repeat="foto in peticion track by foto.IdFoto">
+                        <a href="{{foto.urlacceso}}">
+                            <img class="thumbnail center-div img-responsive" src="{{foto.Url}}" alt="{{foto.Titulo}}">
+                        </a>
+                        <span class="pull-left">{{foto.titulo}}</span>
+                        <span class="pull-right"><i class="fa fa-eye"></i> {{foto.Vistas}} · <i class="fa fa-thumbs-o-up"></i> {{foto.Cantidad_favoritos}} · <i class="fa fa-comment-o"></i> {{foto.Cantidad_comentarios}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

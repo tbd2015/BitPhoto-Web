@@ -22,7 +22,7 @@
             when('/actividad', {templateUrl: 'views/recentactivity.html',   controller: 'RecentCtrl'}).
 
             when('/fotos-de/:cant?', {templateUrl: 'views/photos-from.html',   controller: 'PhotosFromCtrl'}).
-            when('/fotos-con', {templateUrl: 'views/photos-of.html',   controller: 'PhotosOfCtrl'}).
+            when('/fotos-con/:cant?', {templateUrl: 'views/photos-of.html',   controller: 'PhotosOfCtrl'}).
 
             when('/recientes', {templateUrl: 'views/recentphotos.html',   controller: 'HomeCtrl'}).
             when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).

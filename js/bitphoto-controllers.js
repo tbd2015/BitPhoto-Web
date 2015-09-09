@@ -318,6 +318,31 @@
             }
     });
 
+    app.controller('PhotosOfCtrl', function($scope, $routeParams, $location, PhotoService) {
+            if ($routeParams.cant) {
+                $scope.cant = $routeParams.cant;
+            }
+            else {
+                $scope.cant = 5;
+            }
+
+            PhotoService.getPhotosOf($scope.cant).then(function(f) {
+                $scope.respuesta = f.usuarios;
+                $scope.peticion = [];
+                
+                angular.forEach($scope.respuesta.usuariosfollows, function(user) {
+                    angular.forEach(user.photos, function(foto) {
+                        foto.urlacceso = "#/foto/" + foto.IdFoto;
+                        $scope.peticion.push(foto);
+                    });
+                });
+            });
+
+            $scope.recargar = function(cant) {
+                $location.path("/fotos-con/" + cant);
+            }
+    });
+
     // AREA DE TESTING!!!
     app.controller('HolaCtrl', function($scope, TestService) {
         TestService.getHola().then(function(f){ $scope.mensaje = f; });
