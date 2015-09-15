@@ -41,18 +41,6 @@
 			});
 		};
 
-		// GET Obtiene los comentarios de una foto
-		this.getPhotoComments = function(id) {
-			var email = GetterService.getEmail();
-			var path = parms.serverPath + "/photo/" + email + "/comentario/" + id;
-			var p0 = $http.get(path);
-
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				return retorno;
-			});
-		};
-
 		// GET Obtiene el Photostream (portada) de un usuario (a través de su <id> o por cookie)
 		this.getPhotostream = function(id) {
 			if (!id) {
@@ -169,6 +157,35 @@
 		};
 	});
 
+	// SERVICIO Manipulación de comentarios
+	app.service('CommentService', function($http, $q, parms, GetterService, UserDataFactory) {
+		// GET Obtiene los comentarios de una foto
+		this.getPhotoComments = function(id) {
+			var email = GetterService.getEmail();
+			var path = parms.serverPath + "/photo/" + email + "/comentario/" + id;
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};
+
+		this.postPhotoComment = function(idPhoto, text) {
+			var email = GetterService.getEmail();
+			var idUser = UserDataFactory.email2id(email);
+			var path = parms.serverPath + "/photo/" + email + "/comentarioPhoto";
+			var query = { ComentarioFoto: { idComentarioFoto: 0, comentarioFoto: text, idUsuario: { idUsuario: idUser }, idFoto: { idFoto: idPhoto } } };
+			var p0 = $http.post(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				console.log(retorno);
+				return retorno;
+			});
+		};
+	});
+
 	// SERVICIO Manipulación de fotos favoritas
 	app.service('FavoritesService', function($http, $q, parms, GetterService) {
 		// GET Obtener las fotos favoritas de un usuario (por <id> o cookie)
@@ -248,6 +265,18 @@
 					var nombre = ret.data.nombre + " " +ret.data.apellido;
 					var apodo = ret.data.alias;
 					return nombre + " (" + apodo +")";
+				}, function (error) {
+					console.log(error);
+					return "";
+				});
+			},
+			// Obtiene el id en base al <email>
+			email2id: function(email) {
+				var path = parms.serverPath + "/user/" + email;
+				var promise = $http.get(path);
+
+				return promise.then(function(ret) {
+					return ret.idUsuario;
 				}, function (error) {
 					console.log(error);
 					return "";

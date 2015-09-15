@@ -50,7 +50,7 @@
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, GetterService, UserDataFactory, CameraDataFactory) {
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, CommentService, GetterService, UserDataFactory, CameraDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
@@ -77,7 +77,7 @@
                 $scope.zoomCamara = f.Camara.zoom;
             });
 
-            PhotoService.getPhotoComments($routeParams.idfoto).then(function(f) {
+            CommentService.getPhotoComments($routeParams.idfoto).then(function(f) {
                 $scope.comentarios = f;
 
                 angular.forEach($scope.comentarios, function(comm) {
@@ -115,7 +115,22 @@
                 function(error) {
                     $scope.estado = "ERROR de la plataforma";
                 });
-            }
+            };
+
+            $scope.comentar = function() {
+                var correo = GetterService.getEmail();
+                CommentService.postPhotoComment($routeParams.idfoto,$scope.texto).then(function(f) {
+                    if (f.success==="true") {
+                        $scope.estado = "¡Foto comentada!";
+                    }
+                    else {
+                        $scope.estado = "ERROR al comentar";
+                    }
+                },
+                function(error) {
+                    $scope.estado = "ERROR de la plataforma";
+                });
+            };
 	});
 
     // CONTROLADOR Muestra los datos completos de un usuario
