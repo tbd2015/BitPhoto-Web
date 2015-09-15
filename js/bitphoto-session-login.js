@@ -29,7 +29,7 @@
                     $location.path('/portada');
                     vm.dataLoading = false;
                 } else {
-                    console.log("BP-LOG: Login inválido!");
+                    console.log("BP-LOG: Login inválido! " + response.message);
                     FlashService.Error(response.message);
                     $scope.mensaje = response.message;
                     vm.dataLoading = false;

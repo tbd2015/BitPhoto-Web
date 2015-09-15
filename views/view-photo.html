@@ -19,25 +19,28 @@
                     </span>
                 </div>
                 </br>
-                <div class="btn-group" role="group" aria-label="Botonera">
-                    <button type="button" class="btn" ng-click="favoritear()"><i class="fa fa-heart-o"> Agregar a Favoritos</i></button>
-                    <button type="button" class="btn"><i class="fa fa-tag"> Etiquetar</i></button>
+                <div class="mismalinea">
+                    <div class="btn-group" role="group" aria-label="Botonera">
+                        <button type="button" class="btn" ng-click="favoritear()"><i class="fa fa-heart-o"> Agregar a Favoritos</i></button>
+                        <button type="button" class="btn"><i class="fa fa-tag"> Etiquetar</i></button>
+                    </div>
+                    {{estado}}
                 </div>
                 </br></br>
             </div>
             <div class="col-md-4 col-sm-3 col-xs-12">
-                    <h2>Datos de la fotografía</h2>
-                    {{visitasImagen}} visitas<br/>
-                    {{favoritosImagen}} favoritos<br/>
-                    {{comentariosImagen}} comentarios<br/>
-                    Tomada el {{fechaTomadaImagen}}<br/>
-                    Subida el {{fechaSubidaImagen}}<br/>
-                    Permisos: {{permisosImagen}}<br/>
-                    <hr/>
-                    <h2>Datos EXIF</h2>
-                    Modelo Cámara: {{modeloCamara}}<br/>
-                    Resolución: {{resCamara}}<br/>
-                    Zoom: {{zoomCamara}}<br/>
+                <h2>Datos de la fotografía</h2>
+                {{visitasImagen}} visitas<br/>
+                {{favoritosImagen}} favoritos<br/>
+                {{comentariosImagen}} comentarios<br/>
+                Tomada el {{fechaTomadaImagen}}<br/>
+                Subida el {{fechaSubidaImagen}}<br/>
+                Permisos: {{permisosImagen}}<br/>
+                <hr/>
+                <h2>Datos EXIF</h2>
+                Modelo Cámara: {{modeloCamara}}<br/>
+                Resolución: {{resCamara}}<br/>
+                Zoom: {{zoomCamara}}<br/>
             </div>
         </div>
         <div class="row">

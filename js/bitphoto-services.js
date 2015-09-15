@@ -2,7 +2,7 @@
 	var app = angular.module('bitphoto-services',[]);
 
 	// SERVCIO Consulta los datos almacenados en la cookie del navegador
-	app.service('GetterService', function($rootScope, UserService) {
+	app.service('GetterService', function($rootScope) {
 		// Obtiene el email del usuario en la cookie
 		this.getEmail = function() {
 			var cookie = $rootScope.globals.currentUser;
@@ -197,7 +197,9 @@
 		};
 
 		// POST Setear foto como favorita
-		this.setPhotoAsFavorite = function(query) {
+		this.setPhotoAsFavorite = function(id, mail) {
+			query = { FavoritosFoto: { idFoto: { idFoto: id }, idUsuario: { correo: mail } } };
+			//query2 = { FavoritosFoto: { idFoto: { idFoto: 89024648 }, idUsuario: { correo: "daniel.gacitua@usach.cl" } } };
 			email = GetterService.getEmail();
 			path = parms.serverPath + "/photo/" + email + "/favoritofoto";
 			p0 = $http.post(path, query);

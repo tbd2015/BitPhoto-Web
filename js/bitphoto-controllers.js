@@ -50,7 +50,7 @@
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, UserDataFactory, CameraDataFactory) {
+	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, GetterService, UserDataFactory, CameraDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
@@ -82,7 +82,6 @@
 
                 angular.forEach($scope.comentarios, function(comm) {
                     UserDataFactory.id2user(comm.IdUsuario).then(function(g) {
-                        $scope.alias = g.alias;
                         comm.usuario = g.nombre + " " + g.apellido + " (" + g.alias + ")";
                         comm.avatar = g.urlfoto;
                         comm.urlUsuario = "#/fotos/" + comm.IdUsuario;
@@ -104,14 +103,17 @@
             });
 
             $scope.favoritear = function() {
-                var solicitud = "FavoritosFoto: { Foto: {'idfoto': '"+ $routeParams.idfoto +"'}, Usuario: {'aleas': '"+ $scope.alias +"'} }"
-                FavoritesService.setPhotoAsFavorite(solicitud).then(function(f) {
+                var correo = GetterService.getEmail();
+                FavoritesService.setPhotoAsFavorite($routeParams.idfoto,correo).then(function(f) {
                     if (f.success==="true") {
                         $scope.estado = "¡Foto agregada a Favoritos!";
                     }
                     else {
                         $scope.estado = "ERROR al agregar foto a favoritos";
                     }
+                },
+                function(error) {
+                    $scope.estado = "ERROR de la plataforma";
                 });
             }
 	});
