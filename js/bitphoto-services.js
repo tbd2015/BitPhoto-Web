@@ -200,8 +200,7 @@
 		this.setPhotoAsFavorite = function(id, mail) {
 			query = { FavoritosFoto: { idFoto: { idFoto: id }, idUsuario: { correo: mail } } };
 			//query2 = { FavoritosFoto: { idFoto: { idFoto: 89024648 }, idUsuario: { correo: "daniel.gacitua@usach.cl" } } };
-			email = GetterService.getEmail();
-			path = parms.serverPath + "/photo/" + email + "/favoritofoto";
+			path = parms.serverPath + "/photo/" + mail + "/favoritofoto";
 			p0 = $http.post(path, query);
 
 			return $q.all([p0]).then(function(res) {
