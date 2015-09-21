@@ -71,12 +71,6 @@
                 });
             });
 
-            CameraDataFactory.getPhotoCamera($routeParams.idfoto).then(function(f) {
-                $scope.modeloCamara = f.Camara.nombre;
-                $scope.resCamara = f.Camara.megapixeles;
-                $scope.zoomCamara = f.Camara.zoom;
-            });
-
             CommentService.getPhotoComments($routeParams.idfoto).then(function(f) {
                 $scope.comentarios = f;
 
@@ -100,6 +94,12 @@
                         tags.UrlTag = "#/tags/" + tags.NombreTag;
                     });   
                 }
+            });
+
+            CameraDataFactory.getPhotoCamera($routeParams.idfoto).then(function(f) {
+                $scope.modeloCamara = f.Camara.nombre;
+                $scope.resCamara = f.Camara.megapixeles;
+                $scope.zoomCamara = f.Camara.zoom;
             });
 
             $scope.favoritear = function() {

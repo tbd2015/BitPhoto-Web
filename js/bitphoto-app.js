@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'bitphoto-controllers', 'bitphoto-services']);
+    var app = angular.module('bitphoto-app', ['ngRoute', 'ngCookies', 'angular-md5', 'flow', 'bitphoto-controllers', 'bitphoto-services']);
     
     // Parámetros globales del sistema
     app.value('parms', {
@@ -28,7 +28,7 @@
             when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).
             when('/camaras', {templateUrl: 'views/camerafinder.html',   controller: 'HomeCtrl'}).
 
-            when('/subida', {templateUrl: 'views/upload.html',   controller: 'UploadCtrl'}).
+            when('/subida', {templateUrl: 'views/uploader.html',   controller: 'UploadCtrl'}).
 
             when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
@@ -73,4 +73,21 @@
             }
         }
     });
+
+    // CONFIGURACIÓN Sistema de subida provisto por ng-flow
+    app.config(['flowFactoryProvider', function (flowFactoryProvider) {
+        flowFactoryProvider.defaults = {
+            target: '../upload.php',
+            permanentErrors: [404, 500, 501],
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 10,
+            singleFile: true
+        };
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('catchAll', arguments);
+        });
+        // Can be used with different implementations of Flow.js
+        // flowFactoryProvider.factory = fustyFlowFactory;
+    }]);
 })();

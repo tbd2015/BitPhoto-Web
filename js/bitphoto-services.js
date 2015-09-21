@@ -171,6 +171,7 @@
 			});
 		};
 
+		// POST Postear Comentario
 		this.postPhotoComment = function(idPhoto, text) {
 			var email = GetterService.getEmail();
 			var idUser = UserDataFactory.email2id(email);
@@ -215,15 +216,18 @@
 
 		// POST Setear foto como favorita
 		this.setPhotoAsFavorite = function(id, mail) {
-			query = { FavoritosFoto: { idFoto: { idFoto: id }, idUsuario: { correo: mail } } };
+			var query = { "idFoto": id };
 			//query2 = { FavoritosFoto: { idFoto: { idFoto: 89024648 }, idUsuario: { correo: "daniel.gacitua@usach.cl" } } };
-			path = parms.serverPath + "/photo/" + mail + "/favoritofoto";
-			p0 = $http.post(path, query);
+			var path = parms.serverPath + "/photo/" + mail + "/favoritofoto";
+			var prom = $http.post(path, query);
 
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				console.log(retorno);
-				return retorno;
+			return prom.then(function(ret) {
+				//console.log(id + " " + mail);
+				//console.log(ret.data);
+				return ret.data;
+			}, function(error) {
+				console.log(error);
+				return "";
 			});
 		};
 	});
