@@ -158,7 +158,7 @@
 	});
 
 	// SERVICIO Manipulación de comentarios
-	app.service('CommentService', function($http, $q, parms, GetterService, UserDataFactory) {
+	app.service('CommentService', function($http, $q, parms, GetterService) {
 		// GET Obtiene los comentarios de una foto
 		this.getPhotoComments = function(id) {
 			var email = GetterService.getEmail();
@@ -174,15 +174,20 @@
 		// POST Postear Comentario
 		this.postPhotoComment = function(idPhoto, text) {
 			var email = GetterService.getEmail();
-			var idUser = UserDataFactory.email2id(email);
-			var path = parms.serverPath + "/photo/" + email + "/comentarioPhoto";
-			var query = { ComentarioFoto: { idComentarioFoto: 0, comentarioFoto: text, idUsuario: { idUsuario: idUser }, idFoto: { idFoto: idPhoto } } };
-			var p0 = $http.post(path);
+			var path = parms.serverPath + "/photo/" + email + "/comentarioPhoto/" + idPhoto;
+			var query = { "comentarioFoto": text };
 
-			return $q.all([p0]).then(function(res) {
-				var retorno = res[0].data;
-				console.log(retorno);
-				return retorno;
+			console.log(path);
+			console.log(query);
+
+			var prom = $http.post(path, query);
+
+			return prom.then(function(ret) {
+				console.log(ret.data);
+				return ret.data;
+			}, function(error) {
+				console.log(error);
+				return "";
 			});
 		};
 	});
@@ -217,13 +222,10 @@
 		// POST Setear foto como favorita
 		this.setPhotoAsFavorite = function(id, mail) {
 			var query = { "idFoto": id };
-			//query2 = { FavoritosFoto: { idFoto: { idFoto: 89024648 }, idUsuario: { correo: "daniel.gacitua@usach.cl" } } };
 			var path = parms.serverPath + "/photo/" + mail + "/favoritofoto";
 			var prom = $http.post(path, query);
 
 			return prom.then(function(ret) {
-				//console.log(id + " " + mail);
-				//console.log(ret.data);
 				return ret.data;
 			}, function(error) {
 				console.log(error);

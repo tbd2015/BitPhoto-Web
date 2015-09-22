@@ -50,7 +50,7 @@
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía
-	app.controller('PhotoCtrl', function($scope, $routeParams, PhotoService, TagService, FavoritesService, CommentService, GetterService, UserDataFactory, CameraDataFactory) {
+	app.controller('PhotoCtrl', function($scope, $route, $routeParams, PhotoService, TagService, FavoritesService, CommentService, GetterService, UserDataFactory, CameraDataFactory) {
             PhotoService.getPhoto($routeParams.idfoto).then(function(f) {
                 $scope.tituloImagen = f.Titulo;
                 $scope.descripcionImagen = f.Descripcion;
@@ -105,30 +105,25 @@
             $scope.favoritear = function() {
                 var correo = GetterService.getEmail();
                 FavoritesService.setPhotoAsFavorite($routeParams.idfoto,correo).then(function(f) {
-                    if (f.success==="true") {
+                    if (f.success===true) {
                         $scope.estado = "¡Foto agregada a Favoritos!";
                     }
                     else {
                         $scope.estado = "ERROR al agregar foto a favoritos";
                     }
-                },
-                function(error) {
-                    $scope.estado = "ERROR de la plataforma";
                 });
             };
 
             $scope.comentar = function() {
                 var correo = GetterService.getEmail();
                 CommentService.postPhotoComment($routeParams.idfoto,$scope.texto).then(function(f) {
-                    if (f.success==="true") {
+                    if (f.success===true) {
                         $scope.estado = "¡Foto comentada!";
+                        $route.reload();
                     }
                     else {
                         $scope.estado = "ERROR al comentar";
                     }
-                },
-                function(error) {
-                    $scope.estado = "ERROR de la plataforma";
                 });
             };
 	});
