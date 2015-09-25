@@ -6,7 +6,8 @@
         localServerPath: "http://localhost:8080/BitPhoto",
         remoteServerPath: "http://bitphoto-tbd2015.rhcloud.com/bitphoto",
         serverPath: "http://localhost:8080/BitPhoto",
-        fotosPortada: 15
+        fotosPortada: 15,
+        digitosId: 9
     });
 
     // Configuración de rutas de AngularJS y sus respectivos Controladores
@@ -81,8 +82,7 @@
             permanentErrors: [404, 500, 501],
             maxChunkRetries: 1,
             chunkRetryInterval: 5000,
-            simultaneousUploads: 10,
-            singleFile: true
+            simultaneousUploads: 5
         };
         flowFactoryProvider.on('catchAll', function (event) {
             console.log('catchAll', arguments);

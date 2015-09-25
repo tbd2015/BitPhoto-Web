@@ -2,7 +2,7 @@
 	var app = angular.module('bitphoto-services',[]);
 
 	// SERVCIO Consulta los datos almacenados en la cookie del navegador
-	app.service('GetterService', function($rootScope) {
+	app.service('GetterService', function($rootScope, parms) {
 		// Obtiene el email del usuario en la cookie
 		this.getEmail = function() {
 			var cookie = $rootScope.globals.currentUser;
@@ -13,6 +13,16 @@
 		this.getAuthData = function() {
 			var cookie = $rootScope.globals.currentUser;
 			return cookie.authdata;
+		};
+
+		// Obtiene el Timestamp actual alineado a milisegundos
+		this.getTimestamp = function() {
+			return new Date().getTime();
+		};
+
+		// Obtiene un ID pseudo unico basado en el Timestamp
+		this.getTimeId = function() {
+			return this.getTimestamp()%(Math.pow(10,parms.digitosId));
 		};
 	});
 
@@ -301,6 +311,25 @@
 	});
 
 	/* ÁREA DE TESTING */
+
+	// SERVICIO Subida de Fotografías
+	app.service('UploadService', function($http, $q, parms, GetterService) {
+		// POST Subir Fotografias
+		this.doUpload = function(id) {
+			var mail = GetterService.getEmail();
+			var path = parms.serverPath + "/photo/upload/" + mail;
+
+			var query = { "idFoto": id };
+			var prom = $http.post(path, query);
+
+			return prom.then(function(ret) {
+				return ret.data;
+			}, function(error) {
+				console.log(error);
+				return "";
+			});
+		};
+	});
 
 	// FACTORÍA Obtiene datos de la cámara fotográfica
 	app.factory('CameraDataFactory', function($http, parms, GetterService) {

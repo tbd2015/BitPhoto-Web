@@ -46,7 +46,12 @@
 
     // CONTROLADOR Manejador de Subida de Fotos
 	app.controller('UploadCtrl', function($scope) {
-        $scope.variable = "";
+        $scope.uploader = {};
+        
+        $scope.upload = function () {
+            console.log("asdf");
+            $scope.uploader.flow.upload();
+        }
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía
