@@ -1,24 +1,14 @@
 <?php
 require_once './vendor/autoload.php';
 
-$config = new Config();
-$config->setTempDir(storage_path() . '/upload_cache');
-$destination = storage_path() . '/resources/';
-$file = new File($config);
+$config = new \Flow\Config();
+$config->setTempDir('./upload_cache');
 $request = new \Flow\Request();
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-    if ( ! $file->checkChunk() ) {
-        return \Response::make('',204);
-    }
-} else {
-    if ($file->validateChunk()) {
-        $file->saveChunk();
-    } else {
-        return \Response::make('', 400);
-    }
+$info = new SplFileInfo($request->getFileName());
+if (\Flow\Basic::save('./uploads/'.$request->getIdentifier().'.'.$info->getExtension(), $config, $request)) {
+  // file saved successfully and can be accessed at './final_file_destination'
 }
-if ($file->validateFile() && $file->save($destination . $request->getFileName())) {
-    return \Response::make('File upload was completed', 200);
+else {
+	echo ("ERROR!");
 }
+?>

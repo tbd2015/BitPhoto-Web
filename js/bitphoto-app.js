@@ -6,6 +6,7 @@
         localServerPath: "http://localhost:8080/BitPhoto",
         remoteServerPath: "http://bitphoto-tbd2015.rhcloud.com/bitphoto",
         serverPath: "http://localhost:8080/BitPhoto",
+        uploadPath: "upload3.php",
         fotosPortada: 15,
         digitosId: 9
     });
@@ -29,7 +30,7 @@
             when('/mapa-mundial', {templateUrl: 'views/worldmap.html',   controller: 'HomeCtrl'}).
             when('/camaras', {templateUrl: 'views/camerafinder.html',   controller: 'HomeCtrl'}).
 
-            when('/subida', {templateUrl: 'views/uploader.html',   controller: 'UploadCtrl'}).
+            when('/subida', {templateUrl: 'uploader.html',   controller: 'UploadCtrl'}).
 
             when('/foto/:idfoto', {templateUrl: 'views/view-photo.html',   controller: 'PhotoCtrl'}).
             when('/album/:idalbum', {templateUrl: 'views/view-album.html',   controller: 'AlbumPhotosCtrl'}).
@@ -79,10 +80,7 @@
     app.config(['flowFactoryProvider', function (flowFactoryProvider) {
         flowFactoryProvider.defaults = {
             target: '../upload.php',
-            permanentErrors: [404, 500, 501],
-            maxChunkRetries: 1,
-            chunkRetryInterval: 5000,
-            simultaneousUploads: 5
+            permanentErrors: [404, 500, 501]
         };
         flowFactoryProvider.on('catchAll', function (event) {
             console.log('catchAll', arguments);

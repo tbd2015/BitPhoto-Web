@@ -45,13 +45,29 @@
 	});
 
     // CONTROLADOR Manejador de Subida de Fotos
-	app.controller('UploadCtrl', function($scope) {
+	app.controller('UploadCtrl', function($scope, GetterService, UploadService) {
+        // Metodo 1
         $scope.uploader = {};
+        $scope.objetoQuery = [];
         
-        $scope.upload = function () {
-            console.log("asdf");
+        $scope.subida = function () {
+            console.log("Subiendo fotografías!");
+
+            angular.forEach($scope.uploader.flow.files, function(imagen) {
+                var titulo = imagen.name;
+                var extension = titulo.substring(titulo.lastIndexOf('.') + 1).toLowerCase();
+                var fechaActual = new Date();
+                var nuevoId = GetterService.getTimeId();
+                var ruta = "/uploads/" + nuevoId + "." + extension;
+                var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "urlServer": ruta, "descripcion": fechaActual, "formato": extension };
+                imagen.uniqueIdentifier = nuevoId;
+                //console.log(objetoFoto);
+                $scope.objetoQuery.push(objetoFoto);
+            });
+
             $scope.uploader.flow.upload();
-        }
+            UploadService.doUpload($scope.objetoQuery);
+        };
 	});
 
     // CONTROLADOR Muestra la vista de los datos de una fotografía

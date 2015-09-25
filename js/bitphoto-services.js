@@ -315,11 +315,14 @@
 	// SERVICIO Subida de Fotografías
 	app.service('UploadService', function($http, $q, parms, GetterService) {
 		// POST Subir Fotografias
-		this.doUpload = function(id) {
+		this.doUpload = function(query) {
 			var mail = GetterService.getEmail();
 			var path = parms.serverPath + "/photo/upload/" + mail;
 
-			var query = { "idFoto": id };
+			console.log(query);
+			
+			// TODO Descomentar al hacer la consulta de subida
+			/*
 			var prom = $http.post(path, query);
 
 			return prom.then(function(ret) {
@@ -328,6 +331,7 @@
 				console.log(error);
 				return "";
 			});
+			*/
 		};
 	});
 

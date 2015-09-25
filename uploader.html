@@ -7,9 +7,9 @@
         </div>
         <div class="row">
             <div flow-init flow-name="uploader.flow" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
-                <span class="btn btn-default" flow-btn>Upload File</span>
-                <span class="btn btn-default" flow-btn flow-directory>Upload Dir</span>
-                <span class="btn btn-default" ng-click="upload()">DO!</span>
+                <span class="btn btn-default" flow-btn>Seleccionar Fotografía</span>
+                <span class="btn btn-default" flow-btn flow-directory>Seleccionar Carpeta</span>
+                <span class="btn btn-default" ng-click="subida()">¡SUBIR!</span>
 
                 <div class="row-fluid">
                     <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" ng-repeat="file in $flow.files">
@@ -20,6 +20,7 @@
                 </div>
             </div>
         </div>
+        <br>
     </div>
 </main>
 
