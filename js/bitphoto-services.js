@@ -24,6 +24,11 @@
 		this.getTimeId = function() {
 			return this.getTimestamp()%(Math.pow(10,parms.digitosId));
 		};
+
+		// Números aleatorios
+		this.getRandomNumber = function(min, max) {
+			return Math.floor(Math.random()*(max-min+1)+min);
+		};
 	});
 
 	// SERVICIO Procesa consultas relacionadas con la manipulación de fotografías

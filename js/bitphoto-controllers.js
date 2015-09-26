@@ -55,9 +55,9 @@
 
             angular.forEach($scope.uploader.flow.files, function(imagen) {
                 var titulo = imagen.name;
-                var extension = titulo.substring(titulo.lastIndexOf('.') + 1).toLowerCase();
+                var extension = titulo.substring(titulo.lastIndexOf('.')+1).toLowerCase();
                 var fechaActual = new Date();
-                var nuevoId = GetterService.getTimeId();
+                var nuevoId = GetterService.getTimeId() + GetterService.getRandomNumber(0,1000);
                 var ruta = "/uploads/" + nuevoId + "." + extension;
                 var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "urlServer": ruta, "descripcion": fechaActual, "formato": extension };
                 imagen.uniqueIdentifier = nuevoId;
