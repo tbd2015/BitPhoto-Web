@@ -54,12 +54,13 @@
             console.log("Subiendo fotografías!");
 
             angular.forEach($scope.uploader.flow.files, function(imagen) {
+                var descripcion = "foto nueva en la plataforma...";
                 var titulo = imagen.name;
                 var extension = titulo.substring(titulo.lastIndexOf('.')+1).toLowerCase();
                 var fechaActual = new Date();
                 var nuevoId = GetterService.getTimeId() + GetterService.getRandomNumber(0,1000);
                 var ruta = "/uploads/" + nuevoId + "." + extension;
-                var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "urlServer": ruta, "descripcion": fechaActual, "formato": extension };
+                var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "url": ruta, "descripcion": descripcion, "formato": extension };
                 imagen.uniqueIdentifier = nuevoId;
                 //console.log(objetoFoto);
                 $scope.objetoQuery.push(objetoFoto);
