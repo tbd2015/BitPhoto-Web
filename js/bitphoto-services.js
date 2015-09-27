@@ -329,6 +329,7 @@
 			var prom = $http.post(path, query);
 
 			return prom.then(function(ret) {
+				console.log(ret.data);
 				return ret.data;
 			}, function(error) {
 				console.log(error);
