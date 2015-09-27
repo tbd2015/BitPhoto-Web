@@ -4,6 +4,7 @@
 /fotosAvatar
 /fotosPerfil
 /resources
-/upload_cache/*
-/uploads/*
+/uploads/*.png
+/uploads/*.jpg
+/uploads/*.gif
 .directory
