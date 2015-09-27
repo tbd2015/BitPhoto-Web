@@ -54,7 +54,7 @@
             console.log("Subiendo fotografías!");
 
             angular.forEach($scope.uploader.flow.files, function(imagen) {
-                var descripcion = "foto nueva en la plataforma...";
+                var descripcion = "¡Foto nueva en la plataforma!";
                 var titulo = imagen.name;
                 var extension = titulo.substring(titulo.lastIndexOf('.')+1).toLowerCase();
                 var fechaActual = new Date();

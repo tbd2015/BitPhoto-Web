@@ -326,8 +326,6 @@
 
 			console.log(query);
 			
-			// TODO Descomentar al hacer la consulta de subida
-			/*
 			var prom = $http.post(path, query);
 
 			return prom.then(function(ret) {
@@ -336,7 +334,6 @@
 				console.log(error);
 				return "";
 			});
-			*/
 		};
 	});
 
