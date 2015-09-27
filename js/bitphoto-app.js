@@ -6,7 +6,6 @@
         localServerPath: "http://localhost:8080/BitPhoto",
         remoteServerPath: "http://bitphoto-tbd2015.rhcloud.com/bitphoto",
         serverPath: "http://localhost:8080/BitPhoto",
-        uploadPath: "upload3.php",
         fotosPortada: 15,
         digitosId: 9
     });

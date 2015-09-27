@@ -6,7 +6,7 @@
             <h1>Subir Fotografías <small>Cargar fotografías a BitPhoto</small></h1>
         </div>
         <div class="row">
-            <div flow-init flow-name="uploader.flow" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+            <div flow-init flow-name="uploader.flow" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-complete="hacerPeticion()">
                 <div class="row">
                     <span class="btn btn-primary" flow-btn>Seleccionar Fotografía</span>
                     <span class="btn btn-info" flow-btn flow-directory>Seleccionar Carpeta</span>

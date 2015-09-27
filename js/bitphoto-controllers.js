@@ -45,7 +45,7 @@
 	});
 
     // CONTROLADOR Manejador de Subida de Fotos
-	app.controller('UploadCtrl', function($scope, GetterService, UploadService) {
+	app.controller('UploadCtrl', function($scope, $location, GetterService, UploadService) {
         // Metodo 1
         $scope.uploader = {};
         $scope.objetoQuery = [];
@@ -67,7 +67,19 @@
             });
 
             $scope.uploader.flow.upload();
-            UploadService.doUpload($scope.objetoQuery);
+        };
+
+        $scope.hacerPeticion = function () {
+            console.log("Actualizando Servidor!");
+            UploadService.doUpload($scope.objetoQuery).then(function(f) {
+                if (f.success===true) {
+                    console.log("BP-LOG: Foto subida con éxito!");
+                    $location.path("/photostream");   
+                }
+                else {
+                    console.log("ERROR: No se pudo actualizar el servidor!");
+                }
+            });
         };
 	});
 
