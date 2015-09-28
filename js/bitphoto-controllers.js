@@ -149,7 +149,7 @@
                     $scope.tags = f;
 
                     angular.forEach($scope.tags, function(t) {
-                        t.UrlTag = "#/tags/" + tags.NombreTag;
+                        t.UrlTag = "#/tags/" + t.NombreTag;
                     });   
                 }
             });
