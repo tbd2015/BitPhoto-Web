@@ -45,10 +45,11 @@
 	});
 
     // CONTROLADOR Manejador de Subida de Fotos
-	app.controller('UploadCtrl', function($scope, $location, GetterService, UploadService) {
+	app.controller('UploadCtrl', function($scope, $location, md5, GetterService, UploadService) {
         // Metodo 1
         $scope.uploader = {};
         $scope.objetoQuery = [];
+        $scope.subidaExitosa = true;
         
         $scope.subida = function () {
             console.log("Subiendo fotografías!");
@@ -58,28 +59,51 @@
                 var titulo = imagen.name;
                 var extension = titulo.substring(titulo.lastIndexOf('.')+1).toLowerCase();
                 var fechaActual = new Date();
-                var nuevoId = GetterService.getTimeId() + GetterService.getRandomNumber(0,1000);
-                var ruta = "/uploads/" + nuevoId + "." + extension;
-                var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "url": ruta, "descripcion": descripcion, "formato": extension };
-                imagen.uniqueIdentifier = nuevoId;
-                //console.log(objetoFoto);
+                //var nuevoId = GetterService.getTimeId() + GetterService.getRandomNumber(0,1000);
+                //var nuevoId = md5.createHash(GetterService.getRandomNumber(0,1000)+"");
+                var ruta = "/uploads/" + imagen.uniqueIdentifier + "." + extension;
+                //var ruta = "/uploads/" + nuevoId + "." + extension;
+                var objetoFoto = { "idFoto": imagen.uniqueIdentifier, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "url": ruta, "descripcion": descripcion, "formato": extension };
+                //var objetoFoto = { "idFoto": nuevoId, "titulo": titulo, "fechaTomada": fechaActual, "fechaCargada": fechaActual, "url": ruta, "descripcion": descripcion, "formato": extension };
+                //imagen.uniqueIdentifier = nuevoId;
                 $scope.objetoQuery.push(objetoFoto);
             });
 
             $scope.uploader.flow.upload();
         };
 
-        $scope.hacerPeticion = function () {
-            console.log("Actualizando Servidor!");
-            UploadService.doUpload($scope.objetoQuery).then(function(f) {
+        $scope.hacerPeticion = function (id) {
+            var fotoTemp = $scope.obtenerElementoQuery($scope.objetoQuery, id);
+            var envio = [];
+            envio.push(fotoTemp);
+
+            UploadService.doUpload(envio).then(function(f) {
                 if (f.success===true) {
-                    console.log("BP-LOG: Foto subida con éxito!");
-                    $location.path("/photostream");   
+                    console.log("BP-LOG: Foto " + fotoTemp.name + " subida con éxito!");
                 }
                 else {
-                    console.log("ERROR: No se pudo actualizar el servidor!");
+                    console.log("ERROR: No se pudo subir la foto " + fotoTemp.name);
+                    if ($scope.subidaExitosa===true) { $scope.subidaExitosa = false; }
                 }
             });
+        };
+
+        $scope.finalizar = function () {
+            if ($scope.subidaExitosa===true) {
+                console.log("BP-LOG: Todas las fotos subidas con éxito!");
+                $location.path("/photostream");
+            }
+            else {
+                console.log("ERROR: Hubo problemas en la subida");
+            }
+        };
+
+        $scope.obtenerElementoQuery = function(objetoQuery, id) {
+            for (var d = 0, len = objetoQuery.length; d < len; d++) {
+                if (objetoQuery[d].uniqueIdentifier === id) {
+                    return objetoQuery[d];
+                }
+            }
         };
 	});
 
