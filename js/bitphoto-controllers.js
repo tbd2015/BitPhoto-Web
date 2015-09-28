@@ -143,13 +143,27 @@
 
             TagService.getPhotoTags($routeParams.idfoto).then(function(f) {
                 if (f.length <= 0) {
+                    $scope.tags = ""
+                }
+                else {
+                    $scope.tags = f;
+
+                    angular.forEach($scope.tags, function(t) {
+                        t.UrlTag = "#/tags/" + tags.NombreTag;
+                    });   
+                }
+            });
+
+            TagService.getPhotoFriends($routeParams.idfoto).then(function(f) {
+                if (f.length <= 0) {
                     $scope.etiquetas = ""
                 }
                 else {
                     $scope.etiquetas = f;
 
-                    angular.forEach($scope.etiquetas, function(tags) {
-                        tags.UrlTag = "#/tags/" + tags.NombreTag;
+                    angular.forEach($scope.etiquetas, function(e) {
+                        e.nombreEtiqueta = e.nombre + " " + e.apellido + " (" + e.alias + ")";
+                        e.urlEtiqueta = "#/fotos/" + e.idUsuario;
                     });   
                 }
             });

@@ -159,8 +159,8 @@
 	});
 	
 	// SERVICIO Manipulación de etiquetas de fotos
-	app.service('TagService', function($http, $q, parms) {
-		// GET Obtener las etiquetas de la foto <id>
+	app.service('TagService', function($http, $q, parms, GetterService) {
+		// GET Obtener los tags de la foto <id>
 		this.getPhotoTags = function(id) {
 			var path = parms.serverPath + "/tags/" + id;
 			var p0 = $http.get(path);
@@ -170,6 +170,18 @@
 				return retorno;
 			});
 		};
+
+		// GET Obtener las etiquetas de usuarios de la foto <id>
+		this.getPhotoFriends = function(id) {
+			var mail = GetterService.getEmail();
+			var path = parms.serverPath + "/photo/" + mail + "/" + id + "/etiquetas";
+			var p0 = $http.get(path);
+
+			return $q.all([p0]).then(function(res) {
+				var retorno = res[0].data;
+				return retorno;
+			});
+		};		
 	});
 
 	// SERVICIO Manipulación de comentarios
